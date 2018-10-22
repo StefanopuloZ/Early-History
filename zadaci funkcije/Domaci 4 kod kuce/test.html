@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #pocetak {
+        height: 400px;
+        width: 200px;
+        background-color: aqua;
+        border: solid 3px rgb(250, 108, 108);
+        position: relative;
+
+
+    }
+
+    #zelena_loptica {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: green;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div id="pocetak">
+        <div id="zelena_loptica"></div>
+    </div>
+    <script>
+        function kretanjeLoptice() {
+            var loptica = document.getElementById("zelena_loptica");
+            var posTop = 0;
+            var posLeft = 0;
+            var frejmovi = 0;
+            var id = setInterval(vreme, 10);
+            function vreme() {
+                if (frejmovi < 150) {
+                    posTop++;
+                    posLeft++;
+                    frejmovi++;
+                    loptica.style.top = posTop + 'px';
+                    loptica.style.left = posLeft + 'px';
+                } 
+                else {
+                    posTop++;
+                    posLeft--;
+                    frejmovi++;
+                    loptica.style.top = posTop + 'px';
+                    loptica.style.left = posLeft + 'px';
+                }
+            }
+        }
+        kretanjeLoptice(
+
+        )
+    </script>
+
+</body>
+
+</html>

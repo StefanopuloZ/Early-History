@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+#container {
+    display: flex;
+    border: solid red 2px;
+    flex-flow: wrap;
+}
+#container div {
+    height: 70px;
+    width: 20%;
+    border: solid red 5px;
+    padding: 5px;
+}

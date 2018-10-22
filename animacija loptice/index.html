@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kvadrati i loptica</title>
+</head>
+
+
+<body>
+
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            text-align: center;
+            background-color: gray;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+
+        }
+    </style>
+
+
+    <script>
+
+        var elementNumber = 0;
+
+
+        drawBoxesAndAnimateBalls(30);
+
+        function drawBoxesAndAnimateBalls(numberOfBoxes) {
+            for (i = 0; i < numberOfBoxes; i++) {
+                elementNumber++;
+                var ballRadius = randomNumber(5, 20);
+                drawingBoxes(ballRadius);
+            }
+            for (j = 1; j <= numberOfBoxes; j++) {
+                ballMove(j);
+            }
+        }
+
+        function drawingBoxes(ballRadius) {
+            document.body.innerHTML += `<div id=test${elementNumber}><div id=loptica${elementNumber}></div></div>`;
+            document.getElementById("test" + elementNumber).style.position = "absolute";
+            document.getElementById("test" + elementNumber).style.width = randomNumber(50, 500) + "px";
+            document.getElementById("test" + elementNumber).style.height = randomNumber(50, 500) + "px";
+            document.getElementById("test" + elementNumber).style.backgroundColor = randomColor();
+            document.getElementById("test" + elementNumber).style.border = `solid ${randomNumber(2, 15)}px ${randomColor()}`;
+            document.getElementById("test" + elementNumber).style.top = randomNumber(-5, 75) + "%";
+            document.getElementById("test" + elementNumber).style.left = randomNumber(-3, 80) + "%";
+            document.getElementById("loptica" + elementNumber).style.width = ballRadius + "px";
+            document.getElementById("loptica" + elementNumber).style.height = ballRadius + "px";
+            document.getElementById("loptica" + elementNumber).style.backgroundColor = randomColor();
+            document.getElementById("loptica" + elementNumber).style.borderRadius = "100%";
+            document.getElementById("loptica" + elementNumber).style.position = "relative";
+        }
+
+        function ballMove(a) {
+            var ball = document.getElementById("loptica" + a);
+            var box = document.getElementById("test" + a);
+            var ballWidth = parseInt(ball.style.width);
+            var boxWidth = parseInt(box.style.width);
+            var boxHeight = parseInt(box.style.height);
+            var directionRight = true;
+            var directionDown = true;
+            var positionTop = 0;
+            var positionLeft = 20;
+            var id = setInterval(ballAnimation, randomNumber(1, 20));
+            function ballAnimation() {
+                if (directionRight) {
+                    positionLeft++;
+                    ball.style.left = positionLeft + "px";
+                    if (positionLeft + ballWidth === boxWidth) {
+                        directionRight = false;
+                    }
+                }
+                else {
+                    positionLeft--;
+                    ball.style.left = positionLeft + "px";
+                    if (positionLeft === 0) {
+                        directionRight = true;
+                    }
+                }
+                if (directionDown) {
+                    positionTop++;
+                    ball.style.top = positionTop + "px";
+                    if (positionTop + ballWidth === boxHeight) {
+                        directionDown = false;
+                    }
+                }
+                else {
+                    positionTop--;
+                    ball.style.top = positionTop + "px";
+                    if (positionTop === 0) {
+                        directionDown = true;
+                    }
+                }
+            }
+        }
+
+        function randomNumber(min, max) {
+            var number = Math.floor(Math.random() * (max - min + 1) + min);
+            return number;
+        }
+
+        function randomColor() {
+            var r = Math.floor(Math.random() * 255 + 1);
+            var g = Math.floor(Math.random() * 255 + 1);
+            var b = Math.floor(Math.random() * 255 + 1);
+            return `rgb(${r},${g},${b})`;
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+</body>
+
+
+</html>

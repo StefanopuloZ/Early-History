@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Puzze "Zeka"</title>
+
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: rgb(201, 201, 201);
+        text-align: center;
+    }
+
+    img {
+        width: 100px;
+    }
+
+    #container {
+        margin: auto;
+        display: flex;
+        flex-flow: wrap;
+        width: 500px;
+        margin-bottom: 100px;
+    }
+
+    #correct-picture div {
+        width: 20%;
+    }
+
+    #correct-picture {
+        margin: auto;
+        display: flex;
+        flex-flow: wrap;
+        width: 500px;
+    }
+
+    #container div {
+        width: 20%;
+        outline: dashed red 1px;
+    }
+
+    img {
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+</style>
+
+<body>
+
+    <h1>Slagalica "Zekonja"</h1>
+
+    <button id="btn-undo">Undo</button>
+
+    <button id="btn-redo">Redo</button>
+
+    <p id="broj-poteza">Broj poteza: </p>
+
+    <div id="container"></div>
+
+    <div id="correct-picture"></div>
+
+
+    <script>
+        for (i = 0; i < 20; i++) {
+            if (i == 0) {
+                document.getElementById("correct-picture").innerHTML += `<div id="polje${i + 1}"></div>`;
+            }
+            else {
+                document.getElementById("correct-picture").innerHTML += `<div id="polje${i + 1}"><img src="zec/${i + 1}.jpg" alt="${i + 1}"></div>`;
+            }
+        }
+        var tacnaSlika = document.getElementById("correct-picture").innerHTML;
+
+        document.getElementById("correct-picture").innerHTML = "";
+        for (i = 0; i < 20; i++) {
+            if (i == 0) {
+                document.getElementById("correct-picture").innerHTML += `<div id="polje-s${i + 1}"></div>`;
+            }
+            else {
+                document.getElementById("correct-picture").innerHTML += `<div id="polje-s${i + 1}"><img src="zec/${i + 1}.jpg" alt="${i + 1}"></div>`;
+            }
+        }
+
+        var niz = [];
+        for (i = 0; i < 20; i++) {
+            document.getElementById("container").innerHTML += `<div id="polje${i + 1}"></div>`;
+            niz[i] = i + 1;
+        }
+
+        var j = 1;
+        while (niz.length != 0) {
+            var random = Math.floor(Math.random() * niz.length);
+            var randomNumber = Number(niz.splice(random, 1));
+            if (randomNumber == 1) {
+                document.getElementById("polje" + j).innerHTML = "";
+                var praznoPolje = j;
+            }
+            else {
+                document.getElementById("polje" + j).innerHTML = `<img src="zec/${randomNumber}.jpg" alt="${j}">`;
+            }
+            j++;
+        }
+
+        var nizPraznoPolje = [];
+        var nizUndo = [];
+        var nizRedo = [];
+        var nizPraznoPoljeRedo = [];
+
+        var movesCounter = 0;
+
+        document.getElementById("container").addEventListener("click", mogucaZamenaMesta);
+        document.getElementById("btn-undo").addEventListener("click", undo);
+        document.getElementById("btn-redo").addEventListener("click", redo);
+
+
+
+        function mogucaZamenaMesta(event) {
+            var kliknuto = Number(event.target.alt);
+            var razlika = Math.abs(kliknuto - praznoPolje);
+            var zbir = kliknuto + praznoPolje;
+            var poljeNaIvici = true;
+            if ((razlika === 1) && (zbir === 11 || zbir === 21 || zbir === 31)) {
+                poljeNaIvici = false;
+            }
+            if ((razlika == 5 || razlika == 1) && poljeNaIvici)  {
+                nizUndo.push(kliknuto);
+                nizPraznoPolje.push(praznoPolje);
+                document.getElementById(`polje${praznoPolje}`).innerHTML = document.getElementById(`polje${kliknuto}`).innerHTML;
+                document.getElementById(`polje${kliknuto}`).innerHTML = "";
+                document.querySelector(`#polje${praznoPolje} img`).alt = praznoPolje;
+                praznoPolje = kliknuto;
+                var korisnikovaSlika = document.getElementById("container").innerHTML;
+                document.getElementById("broj-poteza").innerHTML = `Broj poteza: ${++movesCounter}`;
+                if (korisnikovaSlika == tacnaSlika) {
+                    document.getElementById("broj-poteza").innerHTML = `Broj poteza: ${++movesCounter}`;
+                    alert("Bravooo!");
+                }
+            }
+        }
+
+
+        function undo() {
+            var kliknuto = nizUndo.pop();
+            var prazno = nizPraznoPolje.pop();
+            nizRedo.push(kliknuto);
+            nizPraznoPoljeRedo.push(prazno);
+            document.getElementById(`polje${kliknuto}`).innerHTML = document.getElementById(`polje${prazno}`).innerHTML;
+            document.getElementById(`polje${prazno}`).innerHTML = "";
+            document.querySelector(`#polje${kliknuto} img`).alt = kliknuto;
+            praznoPolje = prazno;
+            document.getElementById("broj-poteza").innerHTML = `Broj poteza: ${--movesCounter}`;
+
+            
+            
+        };
+
+        function redo() {
+            var kliknuto = nizRedo.pop();
+            var prazno = nizPraznoPoljeRedo.pop();
+            nizUndo.push(kliknuto);
+            nizPraznoPolje.push(prazno);
+            document.getElementById(`polje${prazno}`).innerHTML = document.getElementById(`polje${kliknuto}`).innerHTML;
+            document.getElementById(`polje${kliknuto}`).innerHTML = "";
+            document.querySelector(`#polje${prazno} img`).alt = prazno;
+            praznoPolje = kliknuto;
+            document.getElementById("broj-poteza").innerHTML = `Broj poteza: ${++movesCounter}`;
+        };
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

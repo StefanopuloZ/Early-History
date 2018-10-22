@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Domaci 4 na času</title>
+</head>
+
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+
+
+
+<body>
+
+    <h1>Domaći na času</h1>
+    <h2 id="greeting"></h2>
+
+    <h2>LOTO</h2>
+    <p>
+        <label for="koliko-brojeva">Unesite koliko brojeva želite da izvučete:</label>
+        <input type="number" id="koliko-brojeva">
+    </p>
+    <p>
+        <label for="najveci-broj">Unesite koji je najveći broj koji može biti izvučen:</label>
+        <input type="number" id="najveci-broj">
+    </p>
+    <button id="loto-brojevi">Počni</button>
+    <p id="brojevi-random"></p>
+    <p id="brojevi"></p>
+
+    <script>
+
+        function veci(a, b) {
+            if (a > b) return a;
+            return b;
+        }
+        // console.log(veci(8, 4));
+
+
+        function manji(a, b) {
+            if (a < b) return a;
+            return b;
+        }
+        // console.log(manji(8, 4));
+
+        function obimKruga(r) {
+            return 2 * r * Math.PI
+        }
+        // console.log(obimKruga(8));
+
+        function evroUDinare(evro) {
+            return evro * 117.8
+        }
+        // console.log(evroUDinare(8));
+
+        function dinariUEvro(din) {
+            return din / 117.8
+        }
+        // console.log(evroUDinare(21000));
+
+        //Pozdrav
+        var date = new Date;
+        var currentHour = date.getHours();
+        if (currentHour > 4 && currentHour < 11) {
+            document.getElementById("greeting").innerHTML = "Dobro jutro!";
+        }
+        else if (currentHour < 19 && currentHour > 10) {
+            document.getElementById("greeting").innerHTML = "Dobar dan!";
+        }
+        else {
+            document.getElementById("greeting").innerHTML = "Dobro veče!";
+        }
+
+        function godinaRodjenja(godina) {
+            date = new Date;
+            currentYear = date.getFullYear();
+            return currentYear - godina;
+        }
+
+
+        /*
+                // duzi nacin za starost u danima
+                function starostUDanimaOld(godina, mesec, dan) {
+                    var date = new Date;
+                    var ageYear = date.getFullYear();
+                    var ageMonth = date.getMonth();
+                    var ageDay = date.getDate();
+                    var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                    var currentYearDays = 0;
+                    var birthYearDays = 0;
+                    if (ageYear % 4 === 0) months[1] = 29;
+                    for (i = 1; i < ageMonth; i++) {
+                        currentYearDays += months[i - 1];
+                    }
+                    currentYearDays += ageDay;
+                    console.log(currentYearDays);
+        
+                    months[1] = 28;
+        
+                    if (godina % 4 === 0) months[1] = 29;
+                    for (i = 1; i < mesec; i++) {
+                        birthYearDays += months[i - 1];
+                    }
+                    birthYearDays += dan;
+                    birthYearDays = 365 - birthYearDays;
+                    console.log(birthYearDays);
+        
+                    var daniIzmedju = 0;
+                    for (i = (godina + 1); i < ageYear; i++) {
+                        daniIzmedju += 365;
+                        if (daniIzmedju % 4 === 0) daniIzmedju++;
+                    }
+                    console.log(daniIzmedju);
+        
+        
+                    return daniIzmedju + birthYearDays + currentYearDays
+        
+                }
+        */
+
+        // starost u danima kraci nacin
+        function starostUDanima(year, month, day) {
+            var date1 = new Date();
+            var date1_ms = date1.getTime();
+            var birthday = new Date(year, (month - 1), day);
+            var birthday_ms = birthday.getTime();
+            var days = Math.floor((date1_ms - birthday_ms) / 1000 / 60 / 60 / 24);
+            return days;
+        }
+        // console.log(starostUDanima(1985, 12, 20));
+
+
+        function kbToMb(kb) {
+            return Math.floor(kb / 1024);
+        }
+        // console.log(kbToMb(1000000));
+
+        function stepenovanje(a, pow) {
+            var rezultat = 1;
+            for (i = 0; i < pow; i++) {
+                rezultat *= a;
+            }
+            return rezultat;
+        }
+        //  console.log(stepenovanje(4, 3));
+
+        function mnozenje(a, b) {
+            var rezultat = 0;
+            for (i = 0; i < b; i++) {
+                rezultat += a;
+            }
+            return rezultat;
+        }
+        // console.log(mnozenje(4, 5));
+
+        function samoglasnici(text) {
+            console.log(text.length);
+            var brojSamoglasnika = 0;
+            for (i = 0; i < text.length; i++) {
+                if ((text[i] === "a") || (text[i] === "e") || (text[i] === "i") || (text[i] === "o") || (text[i] === "u")) {
+                    brojSamoglasnika++
+                }
+            }
+            return brojSamoglasnika
+        }
+        // console.log(samoglasnici("test text"));
+
+
+        function deljivSedam(broj) {
+            for (i = 0; i <= broj; i += 7) {
+                if (i === broj) return "Jeste deljiv!";
+            }
+            return "Nije deljiv!";
+        }
+        //  console.log(deljivSedam(14));
+
+
+        // loto brojevi
+        document.getElementById("loto-brojevi").addEventListener("click", lotoBrojevi);
+
+        function lotoBrojevi(brojBrojeva, maksBroj) {
+            document.getElementById("brojevi").innerHTML = "";
+            brojBrojeva = document.getElementById("koliko-brojeva").value;
+            maksBroj = document.getElementById("najveci-broj").value;
+            var broj = 0;
+            brojBrojeva *= 1500;
+            for (i = 0; i < brojBrojeva; i += 1500) {
+                setTimeout(function () {
+                    for (j = 0; j < 1000; j += 50) {
+                        setTimeout(function () {
+                            broj = Math.floor(Math.random() * maksBroj + 1);
+                            document.getElementById("brojevi-random").innerHTML = broj;
+                        }, j);
+                    }
+                    setTimeout(function () {
+                        var l = 0;
+                        while (l < 1) {
+                            if (!document.getElementById("broj" + broj)) {
+                                document.getElementById("brojevi").innerHTML += broj + " ";
+                                document.getElementById("loto-brojevi").innerHTML += `<div id="broj${broj}"></div>`;
+                                l++;
+                            }
+                            else {
+                                broj = Math.floor(Math.random() * maksBroj + 1);
+                                continue;
+                            }
+                        }
+                    }, 1000);
+                }, i);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>

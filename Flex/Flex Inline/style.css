@@ -1,0 +1,42 @@
+#blok1 {
+    justify-content: space-between;
+}
+#blok1 div {
+    width: 10%;
+}
+
+#blok2 {
+    justify-content: space-between;
+}
+#blok2 div:nth-child(1) {
+    order: 1;
+}
+
+#blok3 div {
+    flex: 1;
+}
+#blok3 div:nth-child(3) {
+    flex-grow: 2;
+}
+
+#blok4 div {
+    flex-basis: 200px;
+}
+#blok4 div:nth-child(3) {
+    flex-shrink: 8;
+}
+
+#blok5 div {
+    flex-basis: 200px;
+}
+#blok5 div:nth-child(3) {
+    flex-shrink: 2;
+}
+
+#blok6 div{
+    flex-basis: 100%;
+    height: 50px;
+}
+#blok6 div:nth-of-type(2n + 0){
+    align-self: flex-end;
+}

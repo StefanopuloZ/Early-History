@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Domaci kod kuce</title>
+</head>
+
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <h1>Domaći kod kuće</h1>
+
+
+    <script>
+
+        // Neparni brojevi
+        function neparniBrojevi(min, max) {
+            var neparniBrojevi = [];
+            for (i = min; i <= max; i++) {
+                if (i % 2 === 1) {
+                    neparniBrojevi.push(i);
+                }
+            }
+            return neparniBrojevi;
+        }
+        // console.log(neparniBrojevi(4, 15));
+
+
+        // Neparni brojevi
+        function neparniBrojevi2(min, max) {
+            var neparniBrojevi = [];
+            for (i = min; i <= max; i++) {
+                if (i % 2 === 1) {
+                    neparniBrojevi += i + ",";
+                }
+            }
+            if (neparniBrojevi !== "") {
+                neparniBrojevi = neparniBrojevi.slice(0, (neparniBrojevi.length - 1));
+            }
+            return neparniBrojevi;
+        }
+        // console.log(neparniBrojevi2(4, 15));
+
+        // Skriveni broj
+        document.body.innerHTML += "<button id=hidden-number>Pogodi broj od 1-100</button>";
+        document.getElementById("hidden-number").addEventListener("click", guessNumber);
+        function guessNumber() {
+            var hiddenNumber = Math.floor(Math.random() * 100 + 1);
+            for (i = 0; i < 5; i++) {
+                var number = prompt("Pogodite skriveni broj:");
+                if (number == hiddenNumber) {
+                    alert("Pogodili ste!");
+                    i = 5;
+                }
+                else if (number < hiddenNumber) {
+                    alert("Skriveni broj je veći.");
+                }
+                else alert("Skriveni broj je manji.")
+            }
+        }
+
+        // Random boja pozadine
+        // randomPozadina();
+        function randomPozadina() {
+            var r = Math.floor(Math.random() * 255 + 1);
+            var g = Math.floor(Math.random() * 255 + 1);
+            var b = Math.floor(Math.random() * 255 + 1);
+            document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
+        }
+
+        // Zadnji karakteri u tekstu
+        function zadnjiKarakteri(text, broj) {
+            var x = text.slice(-broj, text.length);
+            return x;
+        }
+        // console.log(zadnjiKarakteri("Neki string", 3));
+
+        // Prvi karakteri u tekstu
+        function prviKarakteri(text, broj) {
+            var x = text.slice(0, broj);
+            return x;
+        }
+        // console.log(prviKarakteri("Neki string", 3));
+
+        // Karakteri od do u tekstu
+        function karakteriOdDo(text, brojOd, brojDo) {
+            var x = text.slice(brojOd, brojDo);
+            return x;
+        }
+        // console.log(karakteriOdDo("Neki string", 2, 7));
+
+        // Prvo pojavljivanje karaktera u tekstu
+        function prvoPojavljivanje(char, text) {
+            var position = text.search(new RegExp(char, "i"));
+            if (position === -1) return 0;
+            return position;
+        }
+        // console.log(prvoPojavljivanje("s", "Java Script"));
+
+        // Broj pojavljivanja karaktera u tekstu
+        function brojPojavljivanje(char, text) {
+            var position = text.toLowerCase().match(new RegExp(char, "g"));
+            return position.length
+        }
+        // console.log(brojPojavljivanje("a", "Java Script"));
+
+        // broj slova u nizu
+        function brojSlovaUStringu(text) {
+            return text.match(/[A-Z]/gi).length;
+        }
+        // console.log(brojSlovaUStringu("ko Te zeli taj te nema"));
+
+        // zamena karaktera
+        function zameni(a, b, text) {
+            for (i = 0; i < text.length; i++) {
+                if (text.charAt(i) === a) {
+                    text = text.replace(a, b);
+                }
+            }
+            return text;
+        }
+        // console.log(zameni("a", "f", "Java Script"));
+
+        function latinicaCirilica(text) {
+            if (text.match(/[A-Y]/gi)) {
+                text = text.replace(/e/gi, "е");
+                text = text.replace(/r/gi, "р");
+                text = text.replace(/t/gi, "т");
+                text = text.replace(/u/gi, "у");
+                text = text.replace(/i/gi, "и");
+                text = text.replace(/o/gi, "о");
+                text = text.replace(/p/gi, "п");
+                text = text.replace(/a/gi, "а");
+                text = text.replace(/s/gi, "с");
+                text = text.replace(/d/gi, "д");
+                text = text.replace(/f/gi, "ф");
+                text = text.replace(/g/gi, "г");
+                text = text.replace(/h/gi, "х");
+                text = text.replace(/j/gi, "ј");
+                text = text.replace(/k/gi, "к");
+                text = text.replace(/l/gi, "л");
+                text = text.replace(/c/gi, "ц");
+                text = text.replace(/v/gi, "в");
+                text = text.replace(/b/gi, "б");
+                text = text.replace(/m/gi, "м");
+                text = text.replace(/n/gi, "н");
+                text = text.replace(/š/gi, "ш");
+                text = text.replace(/č/gi, "ч");
+                text = text.replace(/ć/gi, "ћ");
+                text = text.replace(/ž/gi, "ж");
+                text = text.replace(/đ/gi, "ђ");
+                return text;
+            }
+            else {
+                text = text.replace(/љ/gi, "lj");
+                text = text.replace(/њ/gi, "nj");
+                text = text.replace(/е/gi, "e");
+                text = text.replace(/р/gi, "r");
+                text = text.replace(/т/gi, "t");
+                text = text.replace(/з/gi, "z");
+                text = text.replace(/у/gi, "u");
+                text = text.replace(/и/gi, "i");
+                text = text.replace(/о/gi, "o");
+                text = text.replace(/п/gi, "p");
+                text = text.replace(/ш/gi, "š");
+                text = text.replace(/ђ/gi, "đ");
+                text = text.replace(/а/gi, "a");
+                text = text.replace(/с/gi, "s");
+                text = text.replace(/д/gi, "d");
+                text = text.replace(/ф/gi, "f");
+                text = text.replace(/г/gi, "g");
+                text = text.replace(/х/gi, "h");
+                text = text.replace(/ј/gi, "j");
+                text = text.replace(/к/gi, "k");
+                text = text.replace(/л/gi, "l");
+                text = text.replace(/ч/gi, "č");
+                text = text.replace(/ћ/gi, "ć");
+                text = text.replace(/ж/gi, "ž");
+                text = text.replace(/џ/gi, "dž");
+                text = text.replace(/ц/gi, "c");
+                text = text.replace(/в/gi, "v");
+                text = text.replace(/б/gi, "b");
+                text = text.replace(/н/gi, "n");
+                text = text.replace(/м/gi, "m");
+                return text;
+            }
+        }
+        //console.log(latinicaCirilica("Neki tekst za testiranje ćirilice i latinice"));
+
+        function izbrisiRazmake(text) {
+            return text.trim();
+        }
+        // console.log(izbrisiRazmake("  te   xt "));
+
+        function randomBroj(min, max) {
+            var number = Math.floor(Math.random() * (max - min + 1) + min);
+            return number;
+        }
+        // console.log(randomBroj(5, 20));
+
+        function unazad(text) {
+            var result = "";
+            for (i = text.length; i >= 0; i--) {
+                result += text.charAt(i);
+            }
+            return result;
+        }
+        // console.log(unazad("tekst"));
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

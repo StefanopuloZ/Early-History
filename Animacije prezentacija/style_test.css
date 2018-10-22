@@ -1,0 +1,165 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#hero {
+    border: solid 1px black;
+    width: 400px;
+    display: flex;
+    position: relative;
+    margin: auto;
+    flex-flow: wrap;
+    justify-content: center;
+}
+#hero div {
+    text-align: center;
+    border: solid 0px red;  
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+#hero h1 {
+    padding: 0;
+    margin: 0;
+}
+#hero div:nth-of-type(1) h1{
+   position: relative;
+   bottom: -24px;
+}
+#hero div:nth-of-type(2) h1{
+    position: relative;
+    bottom: 13px;
+}
+#hero div:nth-of-type(2){
+    position: relative;
+    bottom: 0px;
+    height: 10px;
+    animation: start-from-center 2s ease 1;
+    animation: spin 500ms linear 4;
+}
+#hero div:nth-of-type(1){
+    position: relative;
+    animation: start-from-left 2s ease 1;
+}
+#hero div:nth-of-type(3){
+    position: relative;
+    animation: start-from-right 2s ease 1;
+}
+#hero div:nth-of-type(3) h1{
+    position: relative;
+    bottom: 23px;
+}
+
+/* animations */
+/*
+@keyframes start-from-right {
+    0% {position:relative; left: 100%; opacity: 0.0;}
+    100% {position: relative; left: 0; opacity: 1;}
+}
+@keyframes start-from-left {
+	0% {position:relative; right: 100%; opacity: 0.0;}
+	100% {position: relative; right: 0; opacity: 1;}
+}
+@keyframes start-from-center {
+	0% {transform: scale(0); opacity: 0;}
+	100% {transform: scale(1); right: 0; opacity: 1;}
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+}
+100% {
+        transform: rotate(180deg);
+}
+}
+*/
+/*@keyframes rotation {
+    0% {
+            transform: rotate(0deg);
+    }
+    100% {
+            transform: rotate(359deg);
+    }
+}
+*/
+
+#boja {
+    color: blue;
+    animation: head-main-pulsing 2s ease alternate infinite;
+}
+
+@keyframes boja-1 {
+    0% {
+        color: green;
+    }
+    100% {
+        color: red;
+    }
+}
+
+@keyframes color-change {
+    0% { transform: scale(1); }
+    100% { transform: scale(2); }
+}
+@keyframes head-main-pulsing {
+    0% {opacity: 1;
+        color: rgba(255, 0, 0, 0);
+        text-shadow: 5px 0px 5px rgb(255, 0, 0);
+    }
+    100% {opacity: 1;
+        color: rgba(255, 0, 0, 0.1);
+        text-shadow: 5px 0px 5px rgba(255, 0, 0, 0);
+    }
+}
+nav ul, nav li {
+    list-style: none;
+    position: relative;
+}
+nav ul li a{
+    text-decoration: none;
+    color: red;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: ;
+    display: block;
+    border: dotted red 0px;
+    position: relative;
+}
+nav ul li:nth-of-type(1){
+    bottom: 10px;
+    animation: dance 1s infinite alternate-reverse;
+}
+nav ul li:nth-of-type(2){
+    bottom: -15px;
+}
+nav ul li:nth-of-type(3){
+    bottom: 5px;
+}
+nav ul li:nth-of-type(4){
+    bottom: 20px;
+}
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    width: 50%;
+    height: 60px;
+    justify-content: center;
+}
+
+@keyframes dance {
+    0% {
+        bottom: 10px; left: 0px;
+    }
+    50% {
+        left: -5px;
+    }
+    100% {
+        bottom: 5px; left: -10px;
+    }
+}

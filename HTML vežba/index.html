@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vezba d2</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <fieldset>
+                    <legend>Osnovni podaci</legend><br>
+                    <label for="ime">Ime</label><br>
+                    <input type="text" id="ime" name="ime"><br><br>
+                    <label for="lozinka">Lozinka</label><br>
+                    <input type="password" id="lozinka" name="lozinka" value="code"><br><br>
+                    <label for="rodj">Rođendan</label><br>
+                    <input type="date" id="rodj" name="rodj">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Anketa</legend><br>
+                    <label for="oboja">Omiljena boja</label><br>
+                    <select name="oboja" id="oboja">
+                        <option value="">Izaberi boju</option>
+                        <option value="crvena">Crvena</option>
+                        <option value="zuta">Žuta</option>
+                        <option value="zelena">Zelena</option>
+                    </select><br><br>
+                    <label for="slika">Slika</label><br>
+                    <input type="file" id="slika" name="slika"><br><br>
+                    <label for="">Jedan</label><br>
+                    <input type="text" id="jedan" name="jedan" disabled value="jedan"><br><br>
+                    <label for="dva">Dva</label><br>
+                    <input type="text" id="dva" name="dva" value="dva"><br><br>
+                    <label for="tri">Tri</label><br>
+                    <input type="text" id="tri" name="tri" placeholder="tri"><br><br>
+                    <label for="bio">Bio</label><br>
+                    <textarea name="bio" id="bio" cols="30" rows="3"></textarea>
+                </fieldset>
+                <button>Pošalji</button>
+            </td>
+            <td>
+                <p><strong>Ovo</strong> je jako važno! <br>
+                    <em>Ovo</em> je bitno naglasiti! <br>
+                    <strong>Neki <em>jako</em> bitan tekst</strong></p>
+                <hr>
+
+                <ol>
+                    <li>a</li>
+                    <li>&lt;div&gt;</li>
+                    <li>&amp;quot;</li>
+                    <li>a</li>
+                </ol>
+                <hr>
+
+                <ol type="i">
+                    <li>a&nbsp;&nbsp;b</li>
+                    <li>a b</li>
+                    <li>&copy;</li>
+                    <li>a</li>
+                </ol>
+                <hr>
+
+                <ul>
+                    <li>a</li>
+                    <li>a</li>
+                    <li>a</li>
+                    <li>&euro;</li>
+                </ul>
+                <hr>
+
+                <p>jedan <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dva <br>
+                    tri <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;četiri</p>
+
+                <ul>
+                    <li>a</li>
+                    <li>a</li>
+                    <li>a <ol>
+                            <li>b<sup>2</sup></li>
+                            <li>b</li>
+                            <li>H<sub>2</sub>0</li>
+                        </ol>
+                    </li>
+                    <li>a</li>
+                </ul>  
+            </td>
+            <td>
+                <table cellspacing="20">
+                    <tr>
+                        <td>
+                            <table border="1">
+                                    <tr>
+                                        <td>a</td>
+                                        <td>b</td>
+                                    </tr>
+                                    <tr>
+                                        <td>c</td>
+                                        <td>d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>e</td>
+                                        <td>f</td>
+                                    </tr>
+                                </table>
+                        </td>
+                        <td>
+                            <table border="1">
+                                <tr>
+                                    <td>a</td>
+                                    <td>b</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">cd</td>
+                                </tr>
+                                <tr>
+                                    <td>e</td>
+                                    <td>f</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table border="1">
+                                <tr>
+                                    <td rowspan="3">a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">d</td>
+                                    <td>e</td>
+                                </tr>
+                                <tr>
+                                    <td>f</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table border="1">
+                                <caption>Naslov Tabele</caption>
+                                <tr>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                </tr>
+                                <tr>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                </tr>
+                                <tr>
+                                    <td>a</td>
+                                    <td>a</td>
+                                    <td>a</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <th><strong>a</strong></th>
+                                    <th><strong>a</strong></th>
+                                    <th><strong>a</strong></th>
+                                </tr>
+                                <tr>
+                                    <td>b</td>
+                                    <td>b</td>
+                                    <td>b</td>
+                                </tr>
+                                <tr>
+                                    <td>b</td>
+                                    <td>b</td>
+                                    <td>b</td>
+                                </tr>
+                                <tr>
+                                    <td>b</td>
+                                    <td>b</td>
+                                    <td>b</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <audio controls></audio><br>
+                <video controls>
+                    <source src="https://www.youtube.com/watch?v=hLqv-5qT7Lo" type="video/mp4">
+                </video>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

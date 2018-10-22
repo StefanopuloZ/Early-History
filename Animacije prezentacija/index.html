@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>CSS Animations</title>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="head-top">
+            <h1>CSS ANIMATIONS</h1>
+        </div>
+        <div class="head-mid">
+            <h1>CSS ANIMATIONS</h1>
+        </div>
+        <div class="head-bot">
+            <h1>CSS ANIMATIONS</h1>
+        </div>
+        <div class="head-main">
+            <h1>CSS ANIMATIONS</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#animations-2d">2D TRANSFORM</a></li>
+            <li><a href="#animations-3d">3D TRANSFORM</a></li>
+            <li><a href="#transitions">TRANSITION</a></li>
+            <li><a href="#animations">ANIMATION</a></li>
+        </ul>
+        <div id="cover-nav"></div>
+    </nav>
+    <div id="cover"></div>
+
+    <div id="gradient">
+        <div id="columns-holder">
+            <p><q>Well, luckily with animation, fantasy is your friend.</q><br><br>Steven Spielberg</p>
+        </div>
+        <div id="columns"></div>
+    </div>
+    <main>
+        <div id="wrapper">
+
+                <div class="anim-holder2">
+                        <div class="ah2-1"></div>
+                        <div class="ah2-2"></div>
+                    </div>
+
+            <div id="animations-2d" class="content">
+                <h2>2D TRANSFORM</h2>
+                <ul>
+                    <li><a href="#translate">translate()</a></li>
+                    <li><a href="#rotate">rotate()</a></li>
+                    <li><a href="#scale">scale()</a></li>
+                    <li><a href="#skewx">skewX()</a></li>
+                    <li><a href="#skewy">skewY()</a></li>
+                    <li><a href="#matrix">matrix()</a></li>
+                </ul>
+                <div>
+                    <h3 id="translate">translate()</h3>
+                    <p>The translate() method moves an element from its current position (according to the parameters
+                        given for the X-axis and the Y-axis).</p>
+                    <p class="code">transform: translate(60px, 30px);</p>
+                    <div class="example ex1">
+                        <p>translate()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="rotate">rotate()</h3>
+                    <p>The rotate() method rotates an element clockwise or counter-clockwise according to a given
+                        degree.</p>
+                    <p class="code">transform: rotate(180deg);</p>
+                    <div class="example ex2">
+                        <p>rotate()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="scale">scale()</h3>
+                    <p>The scale() method increases or decreases the size of an element (according to the parameters
+                        given for the width and height).</p>
+                    <p class="code">transform: scale(1.5, 0.5);</p>
+                    <div class="example ex3">
+                        <p>scale()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="skewx">skewX()</h3>
+                    <p>The skewX() method skews an element along the X-axis by the given angle.</p>
+                    <p class="code">transform: skewX(40deg);</p>
+                    <div class="example ex4">
+                        <p>skewX()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="skewy">skewY()</h3>
+                    <p>The skewY() method skews an element along the Y-axis by the given angle.</p>
+                    <p class="code">transform: skewY(40deg);</p>
+                    <div class="example ex5">
+                        <p>skewY()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="matrix">matrix()</h3>
+                    <p>The matrix() method combines all the 2D transform methods into one.</p>
+                    <p class="code">transform: matrix(1.4, 0.9, 1.2, -2.5, 0, 0);</p>
+                    <div class="example ex6">
+                        <p>matrix()</p>
+                    </div>
+                    <p>The matrix() method take six parameters, containing mathematic
+                        functions, which allows you to rotate, scale, move (translate), and skew elements.<br>
+                        The parameters are as follow:<br>
+                        matrix(scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY())</p>
+                </div>
+            </div>
+
+            <div class="anim-holder2">
+                    <div class="ah2-1"></div>
+                    <div class="ah2-2"></div>
+                </div>
+
+            <div id="animations-3d" class="content">
+                <h2>3D TRANSFORM</h2>
+                <ul>
+                    <li><a href="#rotatex">rotateX()</a></li>
+                    <li><a href="#rotatey">rotateY()</a></li>
+                    <li><a href="#rotatez">rotateZ()</a></li>
+                </ul>
+                <div>
+                    <h3 id="rotatex">rotateX()</h3>
+                    <p>The rotateX() method rotates an element around its X-axis at a given degree.</p>
+                    <p class="code">transform: rotateX(180deg);</p>
+                    <div class="example ex7">
+                        <p>rotateX()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="rotatey">rotateY()</h3>
+                    <p>The rotateY() method rotates an element around its Y-axis at a given degree.</p>
+                    <p class="code">transform: rotateY(180deg);</p>
+                    <div class="example ex8">
+                        <p>rotateY()</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="rotatez">rotateZ()</h3>
+                    <p>The rotateZ() method rotates an element around its Z-axis at a given degree.</p>
+                    <p class="code code-long">transform: rotateZ(360deg);</p>
+                    <div class="example ex9">
+                        <p>rotateZ()</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anim-holder2">
+                    <div class="ah2-1"></div>
+                    <div class="ah2-2"></div>
+                </div>
+
+            <div id="transitions" class="content">
+                <h2>TRANSITIONS</h2>
+                <ul>
+                    <li><a href="#property">Property Values</a></li>
+                    <li><a href="#transition">Transition Delay</a></li>
+                    <li><a href="#speed">Speed Curve</a></li>
+                </ul>
+                <div>
+                    <h3 id="property">Property Values</h3>
+                    <p>CSS transitions allows you to change property values smoothly (from one value to another), over
+                        a given duration.<br><br>
+                        To create a transition effect, you must specify the <strong>property you want to add an effect
+                            to</strong> and </strong><strong>the duration of the effect.</strong>
+                    </p>
+                    <p class="code">div:hover {<br>width: 300px; height: 200px;<br>transition: width 2s, height 4s;<br>}</p>
+                    <div class="example ex10">
+                        <p>hover</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="transition">Transition Delay</h3>
+                    <p>The transition-delay property specifies a delay (in seconds) for the transition effect.</p>
+                    <p class="code">div:hover {<br>width: 300px; height: 200px;<br>transition: width 2s, height 4s;<br>transition-delay:
+                        1s;<br>}</p>
+                    <div class="example ex11">
+                        <p>hover<br>(1s delay)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="speed">Speed Curve</h3>
+                    <p>The transition-timing-function property specifies the speed curve of the transition effect.<br><br>
+                        The transition-timing-function property can have the following values:</p>
+                    <ul class="normal-list">
+                        <li>ease</li>
+                        <li>linear</li>
+                        <li>ease-in</li>
+                        <li>ease-out</li>
+                        <li>ease-in-out</li>
+                        <li>cubic-bezier(n,n,n,n)</li>
+                    </ul>
+                    <p class="code code-long">
+                        #ease {transition-timing-function: ease;}<br>
+                        #linear {transition-timing-function: linear;}<br>
+                        #ease-in {transition-timing-function: ease-in;}<br>
+                        #ease-out {transition-timing-function: ease-out;}<br>
+                        #ease-in-out {transition-timing-function: ease-in-out;}</p>
+                    <div class="transitions-holder">
+                        <div>
+                            <div class="example example2 ex12">
+                                <p>ease</p>
+                            </div>
+                            <div class="example example2 ex13">
+                                <p>linear</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="example example2 ex14">
+                                <p>ease-in</p>
+                            </div>
+                            <div class="example example2 ex15">
+                                <p>ease-out</p>
+                            </div>
+                            <div class="example example2 ex16">
+                                <p>ease-in-out</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="anim-holder2">
+                <div class="ah2-1"></div>
+                <div class="ah2-2"></div>
+            </div>
+
+            <div id="animations" class="content">
+                <h2>ANIMATIONS</h2>
+                <ul>
+                    <li><a href="#keyframe">@keyframes</a></li>
+                    <li><a href="#duration">Duration</a></li>
+                    <li><a href="#delay">Delay</a></li>
+                    <li><a href="#iteration">Iteration Count</a></li>
+                    <li><a href="#direction">Direction</a></li>
+                    <li><a href="#timing">Timing Function</a></li>
+                    <li><a href="#fill">Fill Mode</a></li>
+                </ul>
+                <ul>
+
+                </ul>
+                <div>
+                    <h3 id="keyframe">@keyframes</h3>
+                    <p>When you specify CSS styles inside the @keyframes rule, the animation will
+                        gradually change from the current style to the new style at certain times.<br><br>
+                        To get an animation to work, you must bind the animation to an element.</p>
+                    <p class="code">@keyframes example {<br>
+                        from {background-color: blue;}<br>
+                        to {background-color: white;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        }</p>
+                    <div class="example ex17">
+                        <p>animation 1</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="duration">Duration</h3>
+                    <p>The animation-duration property defines how long time an animation should take to complete.
+                        If the animation-duration property is not specified, no animation will occur, because the
+                        default
+                        value is 0s (0 seconds). <br><br>
+                        It is also possible to use percent. By using percent, you can add as many style changes as you
+                        like.</p>
+                    <p class="code">@keyframes example {<br>
+                        0% {background-color: blue;}<br>
+                        25% {background-color: white;}<br>
+                        50% {background-color: pink;}<br>
+                        100% {background-color: purple;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        }</p>
+                    <div class="example ex18">
+                        <p>animation 2</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="delay">Delay</h3>
+                    <p>The animation-delay property specifies a delay for the start of an animation.</p>
+                    <p class="code">@keyframes example {<br>
+                        from {background-color: blue;}<br>
+                        to {background-color: white;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        animation-delay: 1s;
+                        }</p>
+                    <div class="example ex19">
+                        <p>animation 3</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="iteration">Iteration Count</h3>
+                    <p>The animation-iteration-count property specifies the number of times an animation should run.</p>
+                    <p class="code">@keyframes example {<br>
+                        from {background-color: blue;}<br>
+                        to {background-color: white;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        animation-iteration-count: 4;<br>
+                        }</p>
+                    <div class="example ex20">
+                        <p>animation 4<br><span class="sp sp1">1</span>
+                            <span class="sp sp2">2</span>
+                            <span class="sp sp3">3</span>
+                            <span class="sp sp4">4</span></p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="direction">Direction</h3>
+                    <p>The animation-direction property specifies whether an animation should be played forwards,
+                        backwards or in alternate cycles.<br><br>
+                        The animation-direction property can have the following values:</p>
+                    <ul class="normal-list">
+                        <li><strong>normal</strong> - The animation is played as normal (forwards). This is default</li>
+                        <li><strong>reverse</strong> - The animation is played in reverse direction (backwards)</li>
+                        <li><strong>alternate</strong> - The animation is played forwards first, then backwards</li>
+                        <li><strong>alternate-reverse</strong> - The animation is played backwards first, then forwards</li>
+                    </ul>
+                    <p class="code">@keyframes example {<br>
+                        from {background-color: blue;}<br>
+                        to {background-color: white;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        animation-direction: reverse;<br>
+                        }</p>
+                    <div class="example ex21">
+                        <p>animation 5</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="timing">Timing Function</h3>
+                    <p>The animation-timing-function property specifies the speed curve of the animation.<br><br>
+                        The animation-direction property can have the following values:</p>
+                    <ul class="normal-list">
+                        <li><strong>ease</strong> - Specifies an animation with a slow start, then fast, then end
+                            slowly (this is default)</li>
+                        <li><strong>linear</strong> - Specifies an animation with the same speed from start to end</li>
+                        <li><strong>ease-in</strong> - Specifies an animation with a slow start</li>
+                        <li><strong>ease-out</strong> - Specifies an animation with a slow end</li>
+                        <li><strong>ease-in-out</strong> - Specifies an animation with a slow start and end</li>
+                        <li><strong>cubic-bezier(n,n,n,n)</strong> - Lets you define your own values in a cubic-bezier
+                            function</li>
+                    </ul>
+                    <p class="code">#div1 {animation-timing-function: linear;}<br>
+                        #div2 {animation-timing-function: ease;}<br>
+                        #div3 {animation-timing-function: ease-in;}<br>
+                        #div4 {animation-timing-function: ease-out;}<br>
+                        #div5 {animation-timing-function: ease-in-out;}</p>
+                    <div class="example ex22">
+                        <p>linear</p>
+                    </div>
+                    <div class="example ex23">
+                        <p>ease</p>
+                    </div>
+                    <div class="example ex24">
+                        <p>ease-in</p>
+                    </div>
+                    <div class="example ex25">
+                        <p>ease-out</p>
+                    </div>
+                    <div class="example ex26">
+                        <p>ease-in-out</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="fill">Fill Mode</h3>
+                    <p>CSS animations do not affect an element before the first keyframe is played or after the last
+                        keyframe is played. The animation-fill-mode property can override this behavior.<br>
+                        The animation-fill-mode property specifies a style for the target element
+                        when the animation is not playing (before it starts, after it ends, or both).<br>
+                        The animation-fill-mode property can have the following values:<br><br></p>
+                    <ul class="normal-list">
+                        <li><strong>none</strong> - Default value. Animation will not apply any styles to the element
+                            before or after it is executing</li>
+                        <li><strong>forwards</strong> - The element will retain the style values that is set by the
+                            last keyframe (depends on animation-direction and animation-iteration-count)</li>
+                        <li><strong>backwards</strong> - The element will get the style values that is set by the first
+                            keyframe (depends on animation-direction), and retain this during the animation-delay
+                            period</li>
+                        <li><strong>both</strong> - The animation will follow the rules for both forwards and
+                            backwards, extending the animation properties in both directions</li>
+                    </ul>
+                    <p class="code">@keyframes example {<br>
+                        from {background-color: blue;}<br>
+                        to {background-color: white;}<br>
+                        }<br>
+                        div {<br>
+                        animation-name: example;<br>
+                        animation-duration: 4s;<br>
+                        animation-fill-mode: forwards;<br>
+                        }</p>
+                    <div class="example ex27">
+                        <p>animation 6</p>
+                    </div>
+                </div>
+                <div class="anim-holder">
+                    <div class="circle-0">
+                        <div class="circle-1">
+                            <div class="circle-105">
+                                <div class="circle-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <footer id="footer">
+                <p> Pure CSS - By Stefan Deak</p> 
+            </footer>
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

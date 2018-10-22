@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Q&A Domaći</title>
+
+    <style>
+
+        main {
+            display: flex;
+            width: 90%;
+            margin: auto;
+            flex-flow: wrap;
+            justify-content: center;
+            align-items: baseline;
+            padding: 60px 0;
+        }
+        main>fieldset {
+            width: 300px;
+            margin: 30px;
+        }
+    
+    </style>
+</head>
+
+
+<body>
+
+
+    <main>
+            <fieldset>
+                <legend>Zadatak 1</legend>
+                <p>
+                    <label for="form-1-input">Kako se zoveš?</label><br>
+                    <input type="text" id="form-1-input"><br>
+                </p>
+                <p>
+                    <input type="button" value="Pošalji" id="form-1-btn">
+                </p>
+                <p id="form-1-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 2</legend>
+                <p>
+                    <label for="form-2-input">Koliko imaš godina?</label><br>
+                    <input type="number" id="form-2-input"><br>
+                </p>
+                <p>
+                    <input type="button" value="Pošalji" id="form-2-btn">
+                </p>
+                <p id="form-2-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 3</legend>
+                <p>
+                    <label for="form-3-input">Kako se zoveš?</label><br>
+                    <input type="text" id="form-3-input"><br>
+                </p>
+                <p>
+                    <label for="form-3-input-b">Koliko imaš godina?</label><br>
+                    <input type="number" id="form-3-input-b"><br>
+                </p>
+                <input type="button" value="Pošalji" id="form-3-btn">
+                <p id="form-3-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 4</legend>
+                <p>
+                    <label for="form-4-input">Kada si rođen?</label><br>
+                    <input type="number" id="form-4-input"><br>
+                </p>
+                <input type="button" value="Pošalji" id="form-4-btn">
+                <p id="form-4-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 5</legend>
+                <p>
+                    <label for="form-5-input">Koliko imaš godina?</label><br>
+                    <input type="number" id="form-5-input"><br>
+                </p>
+                <input type="button" value="Pošalji" id="form-5-btn">
+                <p id="form-5-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 6</legend>
+                <p>
+                    <label for="form-6-input">Upišite ime proizvoda:</label><br>
+                    <input type="text" id="form-6-input"><br>
+                </p>
+                <p>
+                    <label for="form-6-input-b">Upišite trenutnu cenu proizvoda:</label><br>
+                    <input type="number" id="form-6-input-b"><br>
+                </p>
+                <p>
+                    <label for="form-6-input-c">Upišite cenu proizvoda posle poskupljenja:</label><br>
+                    <input type="number" id="form-6-input-c"><br>
+                </p>
+                <input type="button" value="Pošalji" id="form-6-btn">
+                <p id="form-6-output"></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zadatak 7</legend>
+                <p>
+                    <label for="form-7-input-b">Koja je širina sobe?</label><br>
+                    <input type="number" id="form-7-input"><br>
+                </p>
+                <p>
+                    <label for="form-7-input-b">Koja je dužina sobe?</label><br>
+                    <input type="number" id="form-7-input-b"><br>
+                </p>
+                <input type="button" value="Pošalji" id="form-7-btn">
+                <p id="form-7-output"></p>
+            </fieldset>
+
+    </main>
+
+
+
+
+    <script>
+
+        document.getElementById("form-1-btn").addEventListener("click", function () {
+            var ime = document.getElementById("form-1-input").value;
+            document.getElementById("form-1-output").innerHTML = "Vaše ime je " + ime + ".";
+        })
+
+        document.getElementById("form-2-btn").addEventListener("click", function () {
+            var godine = document.getElementById("form-2-input").value;
+            document.getElementById("form-2-output").innerHTML = "Ti imaš " + godine + " godina.";
+        })
+
+        document.getElementById("form-3-btn").addEventListener("click", function () {
+            var ime = document.querySelector("#form-3-input").value;
+            var godine = document.getElementById("form-3-input-b").value;
+            document.getElementById("form-3-output").innerHTML = "Ti se zoveš " + ime + " i imaš " + godine + " godina.";
+        })
+
+        document.getElementById("form-4-btn").addEventListener("click", function () {
+            var godiste = document.getElementById("form-4-input").value;
+            var godine = 2018 - godiste;
+            document.getElementById("form-4-output").innerHTML = "Ti imaš " + godine + " godina.";
+        })
+
+        document.getElementById("form-5-btn").addEventListener("click", function () {
+            var godine = document.getElementById("form-5-input").value;
+            var godiste = 2018 - godine;
+            document.getElementById("form-5-output").innerHTML = "Ti si rođen " + godiste + " godine.";
+        })
+
+        document.getElementById("form-6-btn").addEventListener("click", function () {
+            var ime = document.getElementById("form-6-input").value;
+            var cena1 = document.getElementById("form-6-input-b").value;
+            var cena2 = document.getElementById("form-6-input-c").value;
+            var procenat = (((cena2 - cena1) / cena1) * 100).toFixed(2);
+            document.getElementById("form-6-output").innerHTML = ime + " je poskupeo za " + procenat + " posto.";
+        })
+
+        document.getElementById("form-7-btn").addEventListener("click", function () {
+            var a = document.getElementById("form-7-input").value;
+            var b = document.getElementById("form-7-input-b").value;
+            var p = b * a;
+            document.getElementById("form-7-output").innerHTML = "Površina sobe je " + p + "m<sup>2<sup>";
+        })  
+    </script>
+
+</body>
+
+
+</html>

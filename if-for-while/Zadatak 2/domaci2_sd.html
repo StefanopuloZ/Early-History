@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Domaći 2</title>
+</head>
+
+<style>
+
+    body {
+            text-align: center;
+        }
+    ul {
+      display: flex;
+      flex-flow: wrap;  
+    }
+    li {
+        padding: 5px 35px 5px 0;
+    }
+    td, th{
+        border: 1px solid black;
+        width: 30px;
+    }
+    #random-color {
+        width: 200px;
+        height: 200px;
+        border: solid 1px black;
+    }
+    table {
+    margin: auto;
+    }
+    div {
+    margin: auto;
+    }
+    fieldset {
+        margin: auto;
+        width: 80%;
+        margin-bottom: 30px;
+    }
+
+    </style>
+
+
+<body>
+
+    <h1 id="greeting"></h1>
+    <fieldset>
+        <p>
+            <p id="random-number">Broj:</p>
+            <button id="random">Generiši broj</button>
+            <p id="odd-even"></p>
+            <p id="three"></p>
+        </p>
+
+        <p>
+            <label for="age">Koliko imaš godina?</label><br>
+            <input type="number" name="age" id="age"><br>
+            <button id="age-btn">U redu</button>
+            <p id="age-pass"></p>
+        </p>
+
+        <button id="name">Ime?</button>
+
+        <p>
+            <label for="week-day">Koji je danas dan?</label><br>
+            <button id="week-day-btn">Saznaj</button><br>
+            <p id="week-day"></p>
+        </p>
+    </fieldset>
+
+    <fieldset>
+        <button id="list-generation">Generiši listu</button>
+        <fieldset id="ul-li"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="ispis-dvojki">Ispiši sve dvojke</button>
+        <fieldset id="dvojke"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="ispis-srca">Ispiši sva srca</button>
+        <fieldset id="srca"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="ispis-svih-karti">Ispiši sve karte</button>
+        <fieldset id="sve-karte"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="ispis-random-znaka">Ispiši random znak karte</button>
+        <fieldset id="random-znak"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="ispis-4-karte">Ispiši 4 različite karte</button>
+        <fieldset id="random-4-karte"></fieldset>
+    </fieldset>
+
+    <fieldset>
+        <button id="poredjenje-karti">Uporedi dve karte iz tablića</button>
+        <fieldset id="dve-karte"></fieldset>
+        <p id="dve-karte-rezultat"></p>
+    </fieldset>
+
+    <fieldset>
+        <label for="izbor-godine">Izaberite godinu:</label><br>
+        <select name="izbor-godine" id="izbor-godine"></select>
+    </fieldset>
+
+    <fieldset>
+        <button id="prosta-tabela">Generiši prostu tabelu</button>
+        <table id="tabela"></table>
+    </fieldset>
+
+    <fieldset>
+        <button id="tabela-januar">Generiši januar</button>
+        <table id="januar"></table>
+    </fieldset>
+
+    <fieldset>
+        <button id="tabela-mart">Generiši mart</button>
+        <table id="mart"></table>
+    </fieldset>
+
+    <fieldset>
+        <button id="generacija-boje">Generiši boju</button>
+        <div id="random-color"></div>
+    </fieldset>
+
+    <fieldset>
+        <button id="btn-broj-1-10">Generiši brojeve od 1 do 10</button>
+        <p id="broj-1-10"></p>
+    </fieldset>
+
+    <fieldset>
+        <h3>Pogodi skriveni broj od 1 do 3</h3>
+        <p id="poruka-za-broj"></p>
+        <button id="btn-broj-1-3">Generiši broj</button><br><br>
+        <input id="broj-1-3" type="number" disabled><br><br>
+        <button id="pogodi-1" disabled>Pogodi</button>
+    </fieldset>
+
+    <fieldset>
+        <h3>Pogodi skriveni broj od 1 do 3. Novi broj će biti generisan posle svakog pokušaja</h3>
+        <input id="broj-1-3-auto" type="number"><br><br>
+        <button id="pogodi-1-auto">Pogodi</button>
+    </fieldset>
+
+    <fieldset>
+        <h2>Pogodi broj od 1 do 3</h2>
+        <p>Kliknite na "POČNI" da bi ste startovali igricu. Imate 5 pokušaja. Novi broj će biti generisan posle svakog
+            pokušaja.
+            Za svaki pogodak dobijate 10 bodova.</p>
+        <button id="pocni">POČNI</button>
+        <fieldset>
+            <legend>Igrica "Pogodi broj"</legend>
+            <table>
+                <tr>
+                    <th>Prvi pokušaj</th>
+                    <th>Drugo pokušaj</th>
+                    <th>Treći pokušaj</th>
+                    <th>Četvrti pokušaj</th>
+                    <th>Peti pokušaj</th>
+                </tr>
+                <tr>
+                    <td id="bodovi-1"></td>
+                    <td id="bodovi-2"></td>
+                    <td id="bodovi-3"></td>
+                    <td id="bodovi-4"></td>
+                    <td id="bodovi-5"></td>
+                </tr>
+            </table>
+            <p id="pokusaj"><strong>Pokušaj:</strong></p>
+            <p id="bodovi"><strong>Ukupno bodova:</strong></p>
+            <input id="broj-2-3-auto" type="number"><br><br>
+            <button id="pogodi-2-auto">Pogodi</button>
+            <p id="poruka-pokusaj"></p>
+        </fieldset>
+    </fieldset>
+
+    <fieldset>
+        <label for="tablica-mnozenja">Tablica množenja:</label><br>
+        <select name="tablica-mnozenja" id="tablica-mnozenja"></select>
+    </fieldset>
+
+    <fieldset>
+        <button id="btn-tablica-mnozenja-tabela">Generiši tablicu množenja</button>
+        <table id="tablica-mnozenja-tabela"></table>
+    </fieldset>
+
+    <fieldset>
+        <button id="btn-kalendar">Generiši ceo kalendar</button>
+        <div id="kalendar"></div>
+    </fieldset>
+
+
+
+    <script>
+
+        document.getElementById("random").addEventListener("click", function () {
+            var randomNumber = Math.floor(Math.random() * 10 + 1);
+            document.getElementById("random-number").innerHTML = `Broj: ${randomNumber}`;
+            if (randomNumber % 2 == 0) {
+                document.getElementById("odd-even").innerHTML = `Broj ${randomNumber} je paran`;
+            }
+            else {
+                document.getElementById("odd-even").innerHTML = `Broj ${randomNumber} je neparan`;
+            }
+
+
+            if (randomNumber > 3) {
+                document.getElementById("three").innerHTML = `Broj ${randomNumber} je veći od 3`;
+            }
+            else if (randomNumber == 3) {
+                document.getElementById("three").innerHTML = `Broj ${randomNumber} je jednako 3`;
+            }
+            else {
+                document.getElementById("three").innerHTML = `Broj ${randomNumber} je manji od 3`;
+            }
+        }
+        );
+
+        document.getElementById("age-btn").addEventListener("click", function () {
+            var age = document.getElementById("age").value;
+            if (age >= 18) {
+                document.getElementById("age-pass").innerHTML = `Dozvoljen pristup!`;
+            }
+            else {
+                document.getElementById("age-pass").innerHTML = `Zabranjen pristup!`;
+            }
+        }
+        );
+
+        document.getElementById("name").addEventListener("click", function () {
+            var name = prompt("Kako se zoveš?");
+            if (name == "Zoran" || name == "Uroš" || name == "Mia" ||
+                name == "Sanja" || name == "Miloš" || name == "Marko" || name == "Žarko" ||
+                name == "Tadija" || name == "Mitar") {
+                alert(`Zdravo ${name}!`);
+            }
+            else {
+                alert("Nisi na listi!");
+            }
+        }
+        );
+
+        document.getElementById("week-day-btn").addEventListener("click", function () {
+            var datum = new Date();
+            var datumDan = datum.getDay();
+            var sedmica = ["Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota", "Nedelja"];
+            document.getElementById("week-day").innerHTML = sedmica[datumDan - 1];
+        }
+        );
+
+        var datum = new Date();
+        var sati = datum.getHours();
+        if (sati >= 5 && sati < 10) {
+            document.getElementById("greeting").innerHTML = "Dobro jutro!";
+        }
+        else if (sati < 19 && sati > 9) {
+            document.getElementById("greeting").innerHTML = "Dobar dan!";
+        }
+        else {
+            document.getElementById("greeting").innerHTML = "Dobro veče!";
+        }
+
+        document.getElementById("list-generation").addEventListener("click", function () {
+            var liste = "<ul>";
+            for (var i = 200; i < 301; i++) {
+                liste = liste + "<li><a href=`#`>" + i + "<a></li>";
+            }
+            liste += "</ul>";
+            document.getElementById("ul-li").innerHTML = liste;
+        });
+
+        document.getElementById("ispis-dvojki").addEventListener("click", function () {
+            var dvojke = "";
+            var slovoZaZnak = "";
+            for (brojKarte = 0; brojKarte < 4; brojKarte++) {
+                if (brojKarte == 0) {
+                    slovoZaZnak = "C";
+                }
+                else if (brojKarte == 1) {
+                    slovoZaZnak = "D";
+                }
+                else if (brojKarte == 2) {
+                    slovoZaZnak = "H";
+                }
+                else {
+                    slovoZaZnak = "S";
+                }
+                dvojke = dvojke + `<img src="karte/2${slovoZaZnak}.png" alt="karta-srce" width="100px">`;
+                document.getElementById("dvojke").innerHTML = dvojke;
+            }
+        });
+
+        document.getElementById("ispis-srca").addEventListener("click", function () {
+            var srca = "";
+            for (i = 1; i < 15; i++) {
+                if (i != 11) {
+                    srca = srca + `<img src="karte/${i}H.png" alt="karta-srce" width="100px">`;
+                    document.getElementById("srca").innerHTML = srca;
+                }
+            }
+        });
+
+        document.getElementById("ispis-svih-karti").addEventListener("click", function () {
+            var sveKarte = "";
+            slovoZaZnak = "";
+            for (i = 0; i < 4; i++) {
+                if (i == 0) {
+                    slovoZaZnak = "C";
+                }
+                else if (i == 1) {
+                    slovoZaZnak = "D";
+                }
+                else if (i == 2) {
+                    slovoZaZnak = "H";
+                }
+                else {
+                    slovoZaZnak = "S";
+                }
+                for (brojKarte = 1; brojKarte < 15; brojKarte++) {
+                    if (brojKarte != 11) {
+                        sveKarte = sveKarte + `<img src="karte/${brojKarte + slovoZaZnak}.png" alt="karta-srce" width="100px">`;
+                        document.getElementById("sve-karte").innerHTML = sveKarte;
+                    }
+                }
+            }
+        });
+
+/* /////////////////////////////////////////////// Pocetak za random znak, random 4 karte i poredjenje 2 karte */
+
+    //globalne promenljive
+        var slovoZaZnak = "";
+        var brojKarte = "";
+        var card1 = "";
+        var card2 = "";
+        var card3 = "";
+        var card4 = "";
+        var card1Value = 0;
+        var card2Value = 0;
+        var card3Value = 0;
+        var card4Value = 0;
+
+        document.getElementById("ispis-4-karte").addEventListener("click", function () {
+            randomCards(4, "random-4-karte"); // generise 4 karte
+        });
+
+        document.getElementById("poredjenje-karti").addEventListener("click", function () {
+            randomCards(2, "dve-karte"); //generise dve karte
+            compareTablic(card1Value, card2Value); //poredi dve karte
+        });
+    //funkcije za karte
+        //generise random kartu koja nije 11. tako sto menja globalne: brojKarte i slovoZaZnak
+        function randomCard() {
+            while (k != 0) {
+                var k = 0;
+                var xx = Math.floor(Math.random() * 14 + 1);
+                var yy = Math.floor(Math.random() * 4 + 1);
+                if (xx == 11) {
+                    k--;
+                }
+                else if (yy == 1) {
+                    slovoZaZnak = "C";
+                }
+                else if (yy == 2) {
+                    slovoZaZnak = "D";
+                }
+                else if (yy == 3) {
+                    slovoZaZnak = "H";
+                }
+                else {
+                    slovoZaZnak = "S";
+                }
+                brojKarte = xx;
+            }
+        }
+    //koristi randomCard kako bi izvukao random kartu. proverava koji je znak preko globalne slovoZaZnak i izbacuje poruku
+        function randomZnak() {
+            randomCard();
+            var slovoZaZnakTekst = "";
+            if (slovoZaZnak == "C") {
+                slovoZaZnakTekst = "Generisali ste tref!";
+            }
+            else if (slovoZaZnak == "D") {
+                slovoZaZnakTekst = "Generisali ste karo!";
+            }
+            else if (slovoZaZnak == "H") {
+                slovoZaZnakTekst = "Generisali ste srce!";
+            }
+            else if (slovoZaZnak == "S") {
+                slovoZaZnakTekst = "Generisali ste pik!";
+            }
+            document.getElementById("random-znak").innerHTML = `<h3>${slovoZaZnakTekst}</h3><img src="karte/${brojKarte + slovoZaZnak}.png" alt="karta-srce" width="100px">`;
+        }
+        document.getElementById("ispis-random-znaka").addEventListener("click", function () {
+            randomZnak();
+        });
+
+
+    //prima vrednosti do 4 razlicite karte preko globalnih: card1, card2, card3 i card4. 
+    //generise kartu preko randomCard funkcije i proverava da li je ista kao bilo koja od unetih karti. ako nije vraca njenu vrednost
+        function randomCardAndRandomCheck(card1, card2, card3, card4) {
+            while (k != 0) {
+                var k = 0;
+                randomCard();
+                card = `<img src="karte/${brojKarte + slovoZaZnak}.png" alt="karta-srce" width="100px">`;
+                if (card == card1 || card == card2 || card == card3 || card == card4) {
+                    k--;
+                }
+            }
+            return card;
+        }
+
+    //generise i postavlja random razlicite karte u dokument. menja globalne promenljive card1...card4 i card1Value...card4Value
+    //prima parametar za broj karti i ID elementa u koji treba da ih postavi
+        function randomCards(brojKarti, htmlId) {
+            var cardPlacement = "";
+            var card = "";
+            card1 = "";
+            card1Value = 0;
+            card2 = "";
+            card2Value = 0;
+            card3 = "";
+            card3Value = 0;
+            card4 = "";
+            card4Value = 0;
+            for (i = 0; i < brojKarti; i++) {
+                card = randomCardAndRandomCheck(card1, card2, card3, card4);
+                cardPlacement = cardPlacement + `<img src="karte/${brojKarte + slovoZaZnak}.png" alt="karta-srce" width="100px">`;
+                document.getElementById(htmlId).innerHTML = cardPlacement;
+                if (i == 0) {
+                    card1 = card;
+                    if (brojKarte === 11) brojKarte = 15;
+                    card1Value = brojKarte;
+                }
+                else if (i == 1) {
+                    card2 = card;
+                    if (brojKarte === 11) brojKarte = 15;
+                    card2Value = brojKarte;
+                }
+                else if (i == 2) {
+                    card3 = card;
+                    if (brojKarte === 11) brojKarte = 15;
+                    card3Value = brojKarte;
+                }
+                else {
+                    card4 = card;
+                    if (brojKarte === 11) brojKarte = 15;
+                    card4Value = brojKarte;
+                }
+            }
+        }
+
+        // poredi vrednosti dve karte i dalje rezultat u specifican html 
+        function compareTablic(firstCard, secondCard) {
+            if (firstCard > secondCard) {
+                document.getElementById("dve-karte-rezultat").innerHTML = "Prva karta je veća!";
+            }
+            else if (firstCard < secondCard) {
+                document.getElementById("dve-karte-rezultat").innerHTML = "Druga karta je veća!";
+            }
+            else {
+                document.getElementById("dve-karte-rezultat").innerHTML = "Karte su jednake!";
+            }
+        }
+
+    /* /////////////////////////////////////////////// Kraj za random znak, random 4 karte i poredjenje 2 karte */
+
+        var listaGodina = "";
+        for (i = 1900; i < 2019; i++) {
+            listaGodina = listaGodina + `<option value="${i}">${i}</option>`;
+            document.getElementById("izbor-godine").innerHTML = listaGodina;
+        }
+
+        document.getElementById("prosta-tabela").addEventListener("click", function () {
+            var red = "";
+            var kolona = "";
+            var tabela = "";
+            for (i = 0; i < 3; i++) {
+                for (xy = 0; xy < 5; xy++) {
+                    kolona = kolona + "<td>" + xy + "</td>";
+                }
+                red = "<tr>" + kolona + "</tr>";
+                tabela = tabela + red;
+                kolona = "";
+                red = "";
+                document.getElementById("tabela").innerHTML = tabela;
+            }
+        });
+
+        var dani = ["Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota", "Nedelja"];
+
+        document.getElementById("tabela-januar").addEventListener("click", function () {
+            var naslovDani = "";
+            var teloTabele = "";
+            red = "";
+            kolona = "";
+            for (i = 0; i < 7; i++) {
+                naslovDani = naslovDani + "<th>" + dani[i] + "</th>";
+            }
+            for (i = 1; i < 36; i++) {
+                if (i == 35) {
+                    red = red + "<td></td>";
+                    kolona = kolona + "<tr>" + red + "</tr>";
+                    teloTabele = teloTabele + kolona;
+                    kolona = "";
+                    red = "";
+                }
+                else if (i > 31) {
+                    red = red + "<td></td>";
+                }
+                else if (i % 7 == 0) {
+                    red = red + "<td>" + i + "</td>";
+                    kolona = kolona + "<tr>" + red + "</tr>";
+                    teloTabele = teloTabele + kolona;
+                    kolona = "";
+                    red = "";
+                }
+                else {
+                    red = red + "<td>" + i + "</td>";
+                }
+            }
+            document.getElementById("januar").innerHTML = naslovDani + teloTabele;
+        });
+
+        document.getElementById("tabela-mart").addEventListener("click", function () {
+            var naslovDani = "";
+            var teloTabele = "";
+            red = "";
+            kolona = "";
+            for (i = 0; i < 7; i++) {
+                naslovDani = naslovDani + "<th>" + dani[i] + "</th>";
+            }
+            for (i = 1; i < 36; i++) {
+                if (i < 3) {
+                    red = red + "<td></td>";
+                }
+                else if (i == 35) {
+                    red = red + "<td></td>";
+                    kolona = kolona + "<tr>" + red + "</tr>";
+                    teloTabele = teloTabele + kolona;
+                    kolona = "";
+                    red = "";
+                }
+                else if (i > 33) {
+                    red = red + "<td></td>";
+                }
+                else if (i % 7 == 0) {
+                    red = red + "<td>" + (i - 2) + "</td>";
+                    kolona = kolona + "<tr>" + red + "</tr>";
+                    teloTabele = teloTabele + kolona;
+                    kolona = "";
+                    red = "";
+                }
+                else {
+                    red = red + "<td>" + (i - 2) + "</td>";
+                }
+
+            }
+            document.getElementById("mart").innerHTML = naslovDani + teloTabele;
+        });
+
+        function randomColor() {
+            var red = Math.floor(Math.random() * 256);
+            var green = Math.floor(Math.random() * 256);
+            var blue = Math.floor(Math.random() * 256);
+            document.getElementById("random-color").style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        }
+
+        document.getElementById("generacija-boje").addEventListener("click", function () {
+            randomColor();
+        });
+
+        document.getElementById("btn-broj-1-10").addEventListener("click", function () {
+            var i = 1;
+            var broj = "";
+            while (i <= 10) {
+                broj += i + " ";
+                i++;
+            }
+            document.getElementById("broj-1-10").innerHTML = broj;
+        });
+
+        var skriveniBroj
+        document.getElementById("btn-broj-1-3").addEventListener("click", function () {
+            skriveniBroj = Math.floor(Math.random() * 3 + 1);
+            document.getElementById("poruka-za-broj").innerHTML = "Skriveni broj je generisan.";
+            document.getElementById("broj-1-3").disabled = false;
+            document.getElementById("pogodi-1").disabled = false;
+            // console.log(skriveniBroj);
+        });
+        document.getElementById("pogodi-1").addEventListener("click", function () {
+            var brojKorisnika = document.getElementById("broj-1-3").value;
+            if (brojKorisnika == skriveniBroj) {
+                alert("To je taj broj!");
+                document.getElementById("poruka-za-broj").innerHTML = "";
+                document.getElementById("broj-1-3").disabled = true;
+                document.getElementById("pogodi-1").disabled = true;
+            }
+            else {
+                alert("Nisite pogodili! Probajte opet.");
+            }
+        });
+
+        var skriveniBrojAuto = Math.floor(Math.random() * 3 + 1);
+        document.getElementById("pogodi-1-auto").addEventListener("click", function () {
+            var brojKorisnikaAuto = document.getElementById("broj-1-3-auto").value;
+            if (brojKorisnikaAuto == skriveniBrojAuto) {
+                alert("To je taj broj!");
+                skriveniBrojAuto = Math.floor(Math.random() * 3 + 1);
+            }
+            else {
+                alert("Nisite pogodili! Probajte opet.");
+                skriveniBrojAuto = Math.floor(Math.random() * 3 + 1);
+            }
+        });
+
+        document.getElementById("pogodi-2-auto").disabled = true;
+        document.getElementById("pocni").addEventListener("click", function () {
+            alert("Srećno!");
+            document.getElementById("pogodi-2-auto").disabled = false;
+        }
+        );
+
+        var skriveniBrojAutoIgra = Math.floor(Math.random() * 3 + 1);
+        brojacBodovi = 1;
+        bodovi = 0;
+        document.getElementById("pogodi-2-auto").addEventListener("click", function () {
+            var brojKorisnikaAutoIgra = document.getElementById("broj-1-3-auto").value;
+            if (brojKorisnikaAutoIgra == skriveniBrojAutoIgra) {
+                bodovi += 10;
+                document.getElementById("poruka-pokusaj").innerHTML = "Pogodili ste! Dobijate 10 bodova."
+                document.getElementById("pokusaj").innerHTML = "<strong>Pokušaj: " + brojacBodovi + "</strong>";
+                document.getElementById("bodovi").innerHTML = "<strong>Broj bodova: " + bodovi + "</strong>";
+                document.getElementById("bodovi-" + brojacBodovi).innerHTML = 10;
+                skriveniBrojAutoIgra = Math.floor(Math.random() * 3 + 1);
+                brojacBodovi++;
+                if (brojacBodovi > 5) {
+                    alert("Igra je gotova! Ukupan broj bodova: " + bodovi);
+                    brojacBodovi = 1;
+                    bodovi = 0;
+                    document.getElementById("pokusaj").innerHTML = "<strong>Pokušaj: " + brojacBodovi + "</strong>";
+                    document.getElementById("bodovi").innerHTML = "<strong>Broj bodova: " + bodovi + "</strong>";
+                    document.getElementById("poruka-pokusaj").innerHTML = "";
+                    document.getElementById("pogodi-2-auto").disabled = true;
+                    for (i = 1; i <= 5; i++) {
+                        document.getElementById("bodovi-" + i).innerHTML = "";
+                    }
+                }
+            }
+            else {
+                document.getElementById("poruka-pokusaj").innerHTML = "Pogrešan broj! Dobijate 0 bodova."
+                document.getElementById("pokusaj").innerHTML = "<strong>Pokušaj: " + brojacBodovi + "</strong>";
+                document.getElementById("bodovi").innerHTML = "<strong>Broj bodova: " + bodovi + "</strong>";
+                document.getElementById("bodovi-" + brojacBodovi).innerHTML = 0;
+                skriveniBrojAutoIgra = Math.floor(Math.random() * 3 + 1);
+                brojacBodovi++;
+                if (brojacBodovi > 5) {
+                    alert("Igra je gotova! Ukupan broj bodova: " + bodovi);
+                    brojacBodovi = 1;
+                    bodovi = 0;
+                    document.getElementById("pokusaj").innerHTML = "<strong>Pokušaj: " + brojacBodovi + "</strong>";
+                    document.getElementById("bodovi").innerHTML = "<strong>Broj bodova: " + bodovi + "</strong>";
+                    document.getElementById("poruka-pokusaj").innerHTML = "";
+                    document.getElementById("pogodi-2-auto").disabled = true;
+                    for (i = 1; i <= 5; i++) {
+                        document.getElementById("bodovi-" + i).innerHTML = "";
+                    }
+                }
+            }
+        }
+        )
+
+        var tablicaMnozenja = "";
+        var i = 1;
+        var rezultat;
+        var brojac = 1;
+        while (i <= 10) {
+            var j = 1;
+            while (j <= 10) {
+                rezultat = i * j;
+                tablicaMnozenja += `<option value="${rezultat}">${i} * ${j} = ${rezultat}</option>`;
+                document.getElementById("tablica-mnozenja").innerHTML = listaGodina;
+                j++;
+                brojac++;
+            }
+            i++
+        }
+        document.getElementById("tablica-mnozenja").innerHTML = tablicaMnozenja;
+
+
+        document.getElementById("btn-tablica-mnozenja-tabela").addEventListener("click", function () {
+            var tRed = "";
+            var tKolona = "<td></td>";
+            var tTabela = "";
+            for (i = 0; i <= 10; i++) {
+                for (j = 0; j <= 10; j++) {
+                    if (i == 0) {
+                        if (j == 10) {
+                            break;
+                        }
+                        tKolona += "<td><strong>" + (j + 1) + "</strong></td>";
+                    }
+                    else if (j == 0) {
+                        tKolona += "<td><strong>" + i + "</strong></td>";
+                    }
+                    else
+                        tKolona += "<td>" + (i * j) + "</td>";
+                }
+                tRed = "<tr>" + tKolona + "</tr>";
+                tTabela += tRed;
+                tKolona = "";
+                tRed = "";
+            }
+            document.getElementById("tablica-mnozenja-tabela").innerHTML = `<table>${tTabela}</table>`;
+        });
+
+
+        function ispisMeseca(nazivMeseca, brojDana, pocetakPrazno) {
+            var naslovDani = "";
+            var teloTabele = "";
+            var ukupneCelije = 35;
+            var red = "";
+            var kolona = "";
+            for (i = 0; i < 7; i++) {
+                naslovDani = naslovDani + "<th>" + dani[i] + "</th>";
+            }
+            if (brojDana + pocetakPrazno > 35) {
+                ukupneCelije = 42;
+            }
+            for (i = 1; i <= ukupneCelije; i++) {
+                red += `<td id="celija${i}"></td>`;
+                if (i % 7 == 0) {
+                    kolona += "<tr>" + red + "</tr>";
+                    teloTabele += kolona;
+                    kolona = "";
+                    red = "";
+                }
+            }
+
+            document.getElementById("kalendar").innerHTML += `<table id="mesec${nazivMeseca}"><h3>${nazivMeseca}</h3>` + naslovDani + teloTabele + "</table>";
+
+            for (i = 1; i <= brojDana; i++) {
+                document.querySelector(`#mesec${nazivMeseca} #celija${i + pocetakPrazno}`).innerHTML = i;
+            }
+
+        }
+
+        document.getElementById("btn-kalendar").addEventListener("click", function () {
+            ispisMeseca("Januar", 31, 1);
+            ispisMeseca("Februar", 28, 3);
+            ispisMeseca("Mart", 31, 3);
+            ispisMeseca("April", 30, 6);
+            ispisMeseca("Maj", 31, 1);
+            ispisMeseca("Jun", 30, 4);
+            ispisMeseca("Jul", 31, 6);
+            ispisMeseca("Avgust", 31, 2);
+            ispisMeseca("Septembar", 30, 5);
+            ispisMeseca("Oktobar", 31, 0);
+            ispisMeseca("Novembar", 30, 3);
+            ispisMeseca("Decembar", 31, 5);
+        });
+
+
+
+
+
+
+
+
+
+
+
+//      rgb(255, 217, 217); // tKolona += `<td><strong>${i}</strong></td>`;
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+</html>
