@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Domaći 6 - Objekti i nizovi na času</title>
+</head>
+
+<body>
+
+    <table border="1px" id="table">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+    </table>
+
+    <script>
+
+        let threeLetters = ["a", "b", "c"];
+
+        let threeNumbers = [1, 2, 3];
+
+        let names = ["Stefan", "Ivan", "Marko", "Milica", "Petar", "Ana", "Ivana", "Miloš", "Jovan", "Tamara"];
+
+        let vehicles = ["Golf", "Ford", "Yugo", "Fiat", "Volkswagen", "Audi", "Opel", "Dacia", "BMW", "Ferari"];
+
+        let jobs = ["stolar", "programer", "menadžer", "recepcioner", "prodavac", "fudbaler", "košarkaš", "trener", "broker", "advokat"];
+
+        console.log(randomNumbers(1000000, 10000000, 50));
+
+        console.log(randomChars(200, false));
+
+        console.log(arraysAndLetters(4, 3));
+
+        /*          //u komentaru da bi oslobodilo konzolu
+
+                for (let x in threeNumbers) {
+                    console.log(threeNumbers[x]);
+                }
+                for (let x in names) {
+                    console.log(names[x]);
+                }
+                for (let x in cars) {
+                    console.log(cars[x]);
+                }
+                for (let x in jobs) {
+                    console.log(jobs[x]);
+                }
+                for (let i = 0; i < threeNumbers.length; i++) {
+                    console.log(threeNumbers[i]);
+                }
+                for (let i = 0; i < names.length; i++) {
+                    console.log(names[i]);
+                }
+                for (let i = 0; i < cars.length; i++) {
+                    console.log(cars[i]);
+                }
+                for (let i = 0; i < jobs.length; i++) {
+                    console.log(jobs[i]);
+                }
+                let twoHundredLetters = randomChars(200, false);
+                for (let x in twoHundredLetters) {
+                    console.log(twoHundredLetters[x]);
+                }
+                for (let i = 0; i < twoHundredLetters.length; i++) {
+                    console.log(twoHundredLetters[i]);
+                }
+        */
+
+        let cyrilicLetters = ["е", "Е", "р", "Р", "т", "Т", "з", "З", "у", "У", "и", "И", "о", "О", "п", "П", "ш", "Ш", "ђ", "Ђ",
+            "а", "А", "с", "С", "д", "Д", "ф", "Ф", "г", "Г", "х", "Х", "ј", "Ј", "к", "К", "л", "Л", "ч", "Ч", "ћ", "Ћ", "ж", "Ж", "џ", "Џ",
+            "ц", "Ц", "в", "В", "б", "Б", "н", "Н", "м", "М"];
+
+        console.log(toCyrilic("Ово је неки стринг за промену."));
+
+        let cars = {
+            car1: {
+                model: "BMW",
+                color: "black",
+                doors: 4
+            },
+            car2: {
+                model: "Lada",
+                color: "green",
+                doors: 5
+            },
+            car3: {
+                model: "Toyota",
+                color: "white",
+                doors: 5
+            },
+            car4: {
+                model: "Fiat",
+                color: "red",
+                doors: 3
+            },
+            car5: {
+                model: "Golf",
+                color: "gray",
+                doors: 4
+            }
+        }
+
+        let persons = {
+            person1: {
+                name: "Stefan",
+                lastName: "Deak",
+                profession: "Front End Developer",
+                height: "179cm",
+                weight: "76kg",
+                cars: cars.car1
+            },
+            person2: {
+                name: "Ivan",
+                lastName: "Marković",
+                profession: "Developer",
+                height: "189cm",
+                weight: "82kg",
+                cars: cars.car3
+            },
+            person3: {
+                name: "Ivana",
+                lastName: "Petrović",
+                profession: "Receptionist",
+                height: "160cm",
+                weight: "62kg",
+                cars: null
+            },
+            person4: {
+                name: "Leo",
+                lastName: "Breedlove",
+                profession: "Shaman",
+                height: "172cm",
+                weight: "70kg",
+                cars: cars.car2
+            },
+            person5: {
+                name: "Cathy",
+                lastName: "Domanović",
+                profession: "CEO",
+                height: "180cm",
+                weight: "73kg",
+                cars: [cars.car1, cars.car4]
+            }
+        }
+
+        console.log(createPersons(names, vehicles, jobs));
+
+        console.log(tableToObject(3, 6));
+        
+
+        function tableToObject(rows, columns) {
+            let newObject = {};
+            let columnString = "";
+            let td = document.getElementsByTagName("td");
+            let rowCount = 1;
+            for (let i = 1; i <= (columns * rows); i++) {
+                columnString += td[i - 1].innerHTML + " ";
+                if (i % columns === 0) {
+                    columnString = columnString.trim();
+                    newObject["row" + rowCount] = columnString;
+                    ++rowCount;
+                    columnString = "";
+                }
+            }
+            return newObject;
+        }
+
+        function createPersons(names, vehicles, jobs) {
+            let newArray = {};
+            for (i = 0; i < names.length; i++) {
+                newArray[`person` + (i + 1)] = new Person(names[i], undefined, jobs[i], undefined, undefined, vehicles[i]);
+            }
+            return newArray;
+        }
+
+        function Person(name, lastName, profession, height, weight, cars) {
+            this.name = name;
+            this.lastName = lastName;
+            this.profession = profession;
+            this.height = height;
+            this.weight = weight;
+            this.cars = cars;
+        }
+
+        function toCyrilic(string) {
+            let newString = "";
+            for (i = 0; i < string.length; i++) {
+                // to cyrilic
+                if (string[i] === "e" && newString.length <= i) newString += "е";
+                if (string[i] === "E" && newString.length <= i) newString += "Е";
+                if (string[i] === "r" && newString.length <= i) newString += "р";
+                if (string[i] === "R" && newString.length <= i) newString += "Р";
+                if (string[i] === "t" && newString.length <= i) newString += "т";
+                if (string[i] === "T" && newString.length <= i) newString += "Т";
+                if (string[i] === "u" && newString.length <= i) newString += "у";
+                if (string[i] === "U" && newString.length <= i) newString += "У";
+                if (string[i] === "i" && newString.length <= i) newString += "и";
+                if (string[i] === "I" && newString.length <= i) newString += "И";
+                if (string[i] === "o" && newString.length <= i) newString += "о";
+                if (string[i] === "O" && newString.length <= i) newString += "О";
+                if (string[i] === "p" && newString.length <= i) newString += "п";
+                if (string[i] === "P" && newString.length <= i) newString += "П";
+                if (string[i] === "a" && newString.length <= i) newString += "а";
+                if (string[i] === "A" && newString.length <= i) newString += "А";
+                if (string[i] === "s" && newString.length <= i) newString += "с";
+                if (string[i] === "S" && newString.length <= i) newString += "С";
+                if (string[i] === "d" && newString.length <= i) newString += "д";
+                if (string[i] === "D" && newString.length <= i) newString += "Д";
+                if (string[i] === "f" && newString.length <= i) newString += "ф";
+                if (string[i] === "F" && newString.length <= i) newString += "Ф";
+                if (string[i] === "g" && newString.length <= i) newString += "г";
+                if (string[i] === "г" && newString.length <= i) newString += "g";
+                if (string[i] === "G" && newString.length <= i) newString += "Г";
+                if (string[i] === "h" && newString.length <= i) newString += "х";
+                if (string[i] === "H" && newString.length <= i) newString += "Х";
+                if (string[i] === "j" && newString.length <= i) newString += "ј";
+                if (string[i] === "J" && newString.length <= i) newString += "Ј";
+                if (string[i] === "k" && newString.length <= i) newString += "к";
+                if (string[i] === "K" && newString.length <= i) newString += "К";
+                if (string[i] === "l" && newString.length <= i) newString += "л";
+                if (string[i] === "L" && newString.length <= i) newString += "Л";
+                if (string[i] === "z" && newString.length <= i) newString += "з";
+                if (string[i] === "Z" && newString.length <= i) newString += "З";
+                if (string[i] === "c" && newString.length <= i) newString += "ц";
+                if (string[i] === "C" && newString.length <= i) newString += "Ц";
+                if (string[i] === "v" && newString.length <= i) newString += "в";
+                if (string[i] === "V" && newString.length <= i) newString += "В";
+                if (string[i] === "b" && newString.length <= i) newString += "б";
+                if (string[i] === "B" && newString.length <= i) newString += "Б";
+                if (string[i] === "n" && newString.length <= i) newString += "н";
+                if (string[i] === "N" && newString.length <= i) newString += "Н";
+                if (string[i] === "m" && newString.length <= i) newString += "м";
+                if (string[i] === "M" && newString.length <= i) newString += "М";
+                // to latinic
+                if (string[i] === "љ" && newString.length <= i) newString += "lj";
+                if (string[i] === "Љ" && newString.length <= i) newString += "Lj";
+                if (string[i] === "њ" && newString.length <= i) newString += "nj";
+                if (string[i] === "Њ" && newString.length <= i) newString += "Nj";
+                if (string[i] === "е" && newString.length <= i) newString += "e";
+                if (string[i] === "Е" && newString.length <= i) newString += "E";
+                if (string[i] === "р" && newString.length <= i) newString += "r";
+                if (string[i] === "Р" && newString.length <= i) newString += "R";
+                if (string[i] === "т" && newString.length <= i) newString += "t";
+                if (string[i] === "Т" && newString.length <= i) newString += "T";
+                if (string[i] === "з" && newString.length <= i) newString += "z";
+                if (string[i] === "З" && newString.length <= i) newString += "Z";
+                if (string[i] === "у" && newString.length <= i) newString += "u";
+                if (string[i] === "У" && newString.length <= i) newString += "U";
+                if (string[i] === "и" && newString.length <= i) newString += "i";
+                if (string[i] === "И" && newString.length <= i) newString += "I";
+                if (string[i] === "о" && newString.length <= i) newString += "o";
+                if (string[i] === "О" && newString.length <= i) newString += "O";
+                if (string[i] === "п" && newString.length <= i) newString += "p";
+                if (string[i] === "П" && newString.length <= i) newString += "P";
+                if (string[i] === "ш" && newString.length <= i) newString += "s";
+                if (string[i] === "Ш" && newString.length <= i) newString += "S";
+                if (string[i] === "ђ" && newString.length <= i) newString += "dj";
+                if (string[i] === "Ђ" && newString.length <= i) newString += "Dj";
+                if (string[i] === "а" && newString.length <= i) newString += "a";
+                if (string[i] === "А" && newString.length <= i) newString += "A";
+                if (string[i] === "с" && newString.length <= i) newString += "s";
+                if (string[i] === "С" && newString.length <= i) newString += "S";
+                if (string[i] === "д" && newString.length <= i) newString += "d";
+                if (string[i] === "Д" && newString.length <= i) newString += "D";
+                if (string[i] === "ф" && newString.length <= i) newString += "f";
+                if (string[i] === "Ф" && newString.length <= i) newString += "F";
+                if (string[i] === "г" && newString.length <= i) newString += "g";
+                if (string[i] === "Г" && newString.length <= i) newString += "G";
+                if (string[i] === "х" && newString.length <= i) newString += "x";
+                if (string[i] === "Х" && newString.length <= i) newString += "X";
+                if (string[i] === "ј" && newString.length <= i) newString += "j";
+                if (string[i] === "Ј" && newString.length <= i) newString += "J";
+                if (string[i] === "к" && newString.length <= i) newString += "k";
+                if (string[i] === "К" && newString.length <= i) newString += "K";
+                if (string[i] === "л" && newString.length <= i) newString += "l";
+                if (string[i] === "Л" && newString.length <= i) newString += "L";
+                if (string[i] === "ч" && newString.length <= i) newString += "c";
+                if (string[i] === "Ч" && newString.length <= i) newString += "C";
+                if (string[i] === "ћ" && newString.length <= i) newString += "c";
+                if (string[i] === "Ћ" && newString.length <= i) newString += "C";
+                if (string[i] === "ж" && newString.length <= i) newString += "z";
+                if (string[i] === "Ж" && newString.length <= i) newString += "Z";
+                if (string[i] === "џ" && newString.length <= i) newString += "dz";
+                if (string[i] === "Џ" && newString.length <= i) newString += "Dz";
+                if (string[i] === "ц" && newString.length <= i) newString += "c";
+                if (string[i] === "Ц" && newString.length <= i) newString += "C";
+                if (string[i] === "в" && newString.length <= i) newString += "v";
+                if (string[i] === "В" && newString.length <= i) newString += "V";
+                if (string[i] === "б" && newString.length <= i) newString += "b";
+                if (string[i] === "Б" && newString.length <= i) newString += "B";
+                if (string[i] === "н" && newString.length <= i) newString += "n";
+                if (string[i] === "Н" && newString.length <= i) newString += "N";
+                if (string[i] === "м" && newString.length <= i) newString += "m";
+                if (string[i] === "М" && newString.length <= i) newString += "M";
+                if (newString.length <= i) newString += string[i];
+            }
+            return newString;
+        }
+
+        function arraysAndLetters(numberOfArrays, numberOfLetters) {
+            let mainArray = [];
+            for (i = 0; i < numberOfArrays; i++) {
+                let newArray = randomChars(numberOfLetters, true);
+                mainArray[i] = newArray;
+            }
+            return mainArray;
+        }
+
+
+        function randomChars(ammount, noRepeat) {
+            let newArray = [];
+            let letters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+            for (let i = 0; i < ammount; i++) {
+                let letter = Math.floor(Math.random() * letters.length);
+                if (letters[letter] === "/") {
+                    --i;
+                    continue;
+                }
+                newArray.push(letters[letter]);
+                if (ammount < 53 && noRepeat) {
+                    letters = letters.replace(letters[letter], "/");
+                }
+            }
+            return newArray;
+        }
+
+        function randomNumbers(min, max, ammount) {
+            let newArray = [];
+            for (let i = 0; i < ammount; i++) {
+                let number = randomNumber(min, max);
+                let j = 0;
+                while (j < newArray.length) {
+                    if (number === newArray[j]) {
+                        number = randomNumber(min, max);
+                        j = 0;
+                    }
+                    else {
+                        ++j;
+                    }
+                }
+                newArray.push(number);
+            }
+            return newArray;
+        }
+
+        function randomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
