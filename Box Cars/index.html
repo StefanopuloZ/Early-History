@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cars</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: gray;
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #menu {
+            top: 20px;
+            text-align: center;
+            position: absolute;
+            width: 400px;
+            background-color: burlywood;
+            color: rgb(46, 46, 46);
+            left: 39%;
+            padding: 20px;
+            border: solid rgb(48, 6, 6) 5px;
+            z-index: 200;
+        }
+
+        #start {
+            display: block;
+            margin: auto;
+            padding: 7px 15px;
+            background-color: white;
+            color: black;
+            font-weight: bolder;
+        }
+
+        #driver {
+            width: 50px;
+            height: 80px;
+            background-color: red;
+            position: absolute;
+            left: 150px;
+            top: 680px;
+        }
+
+        #road {
+            width: 800px;
+            margin: auto;
+            position: relative;
+            height: 900px;
+            background-color: gray;
+            background-image: url("images/road2.jpg");
+            background-repeat: repeat;
+        }
+
+        .road-animation {
+            animation: road-move 1600ms linear infinite;
+        }
+
+        #crash {
+            position: absolute;
+            font-size: 80px;
+            color: darkred;
+            left: 28%;
+            top: 20%;
+            z-index: 100;
+            text-shadow: 5px 5px 5px white;
+            animation: blink .75s linear infinite;
+        }
+
+        #track {
+            width: 340px;
+            margin: auto;
+            height: 900px;
+            position: relative;
+            left: 25px;
+            overflow: hidden;
+        }
+
+        #track>div {
+            box-shadow: 2px 2px 5px black;
+        }
+
+        @keyframes road-move {
+            0% {
+                background-position-y: 0px;
+            }
+
+            100% {
+                background-position-y: 480px;
+            }
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            50.01% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="menu">
+        <h2>Cars Game</h2>
+        <p>Use LEFT and RIGHT arrows to move. Watch out for other cars!</p>
+        <button id="start">GO!</button>
+    </div>
+    <div id="road">
+        <h1 id="crash">CRASHED!</h1>
+        <div id="track">
+            <div id="driver"></div>
+        </div>
+    </div>
+
+    <script>
+
+        let driverPositionVertical = 680;
+        let driverPositionHorizontal = 150;
+        let going;
+        let directionLeft;
+        let driving = false;
+        let collision = false;
+        document.getElementById("crash").hidden = true;
+        let driver = document.getElementById("driver");
+        document.body.addEventListener("keydown", moveMyCar);
+        let intervalNewRandomCar;
+
+        document.getElementById("start").addEventListener("click", function (event) {
+            prepareGame();
+            newRandomCar();
+            intervalNewRandomCar = setInterval(newRandomCar, randomNumber(50, 2000));
+        });
+
+        function prepareGame() {
+            driverPositionVertical = 680;
+            driverPositionHorizontal = 150;
+            driving = false;
+            collision = false;
+            document.getElementById("road").classList.add("road-animation");
+            document.getElementById("menu").hidden = true;
+            document.getElementById("crash").hidden = true;
+            document.body.addEventListener("keydown", moveMyCar);
+        }
+
+        function moveMyCar(event) {
+            if (driving) return;
+            document.body.addEventListener("keyup", stopMyCar);
+            if (event.key === "ArrowLeft") {
+                going = setInterval(driveMyCar, 1);
+                directionLeft = true;
+                driving = true;
+            }
+            else if (event.key === "ArrowRight") {
+                going = setInterval(driveMyCar, 1);
+                directionLeft = false;
+                driving = true;
+            }
+
+            function driveMyCar() {
+                if (directionLeft) driverPositionHorizontal -= 1;
+                else driverPositionHorizontal += 1;
+                if (driverPositionHorizontal > 287) driverPositionHorizontal = 287;
+                if (driverPositionHorizontal < 0) driverPositionHorizontal = 0;
+                driver.style.left = driverPositionHorizontal + "px";
+            }
+        }
+
+        function stopMyCar(event) {
+            clearInterval(going);
+            driving = false;
+        }
+
+        function newRandomCar() {
+            let newCar = document.createElement("div");
+            newCar.classList.add("remove-cars");
+            document.getElementById("track").appendChild(newCar);
+            let randomCarHeight = randomNumber(50, 100);
+            let randomCarWidth = randomNumber(40, (randomCarHeight - 10));
+            newCar.style.width = randomCarWidth + "px";
+            newCar.style.height = randomCarHeight + "px";
+            newCar.style.backgroundColor = randomColor();
+            newCar.style.position = "absolute";
+            newCar.style.top = -randomCarHeight + "px";
+            newCar.style.left = randomNumber(0, (337 - randomCarWidth)) + "px";
+            let x = parseInt(newCar.style.top);
+            let y = parseInt(newCar.style.left);
+
+            function randomCarMove() {
+                x += 2;
+                newCar.style.top = x + "px";
+                if (colisionDetection(x, y, randomCarWidth, randomCarHeight)) clearInterval(intervalCarMove);
+                if (x >= 2000) {
+                    clearInterval(intervalCarMove);
+                    let carsToBeCleared = document.querySelectorAll("div");
+                    carsToBeCleared.forEach(function (element) {
+                        if (parseInt(element.style.top) >= 2000) {
+                            element.remove();
+                        }
+                    });
+                }
+            }
+            let intervalCarMove = setInterval(randomCarMove, randomNumber(3, 6));
+        }
+
+        function colisionDetection(randomCarPositionVertical, randomCarPositionHorizontal, randomCarWidth, randomCarHeight) {
+            let xColision = Math.abs(randomCarPositionVertical - driverPositionVertical);
+            let yColision = Math.abs(randomCarPositionHorizontal - driverPositionHorizontal);
+
+            if (xColision < randomCarHeight) {
+                if (yColision < randomCarWidth && (randomCarPositionHorizontal <= driverPositionHorizontal)) {
+                    crashed();
+                    return true;
+                }
+                if (yColision < (50) && (randomCarPositionHorizontal >= driverPositionHorizontal)) {
+                    crashed();
+                    return true;
+                }
+            }
+        }
+
+        function crashed() {
+            clearInterval(intervalNewRandomCar);
+            document.body.removeEventListener("keydown", moveMyCar);
+            document.getElementById("crash").hidden = false;
+            document.getElementById("road").classList.remove("road-animation");
+            document.getElementById("menu").hidden = false;
+            let removeCars = document.querySelectorAll(".remove-cars");
+            removeCars.forEach(function (element) {
+                element.remove();
+            });
+            driver.style.top = "680px";
+            driver.style.left = "150px";
+        }
+
+        function randomNumber(max, min) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function randomColor() {
+            var r = Math.floor(Math.random() * 255 + 1);
+            var g = Math.floor(Math.random() * 255 + 1);
+            var b = Math.floor(Math.random() * 255 + 1);
+            return `rgb(${r},${g},${b})`;
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

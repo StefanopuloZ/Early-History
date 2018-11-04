@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        let table = "<table id='table' border=1px>";
+        let cellNumber = 1;
+        for (let i = 0; i < 10; i++) {
+            table += "<tr>";
+            for (let i = 0; i < 10; i++) {
+                table += `<td id="cell-${cellNumber}"></td>`;
+                ++cellNumber;
+            }
+            table += "</tr>";
+        }
+        table += "</table>";
+
+        document.body.innerHTML += table;
+
+        let cells = document.querySelectorAll("[id^=cell-]");
+
+        let randomNumbers = [];
+        for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 50; j++) {
+                if (i === 0) {
+                    randomNumbers[j] = j + 1;
+                }
+                if (i === 1) {
+                    randomNumbers[j + 50] = j + 1;
+                }
+            }
+        }
+        let selection = [];
+        cells.forEach(function (element) {
+            element.style.width = "25px";
+            element.style.height = "25px";
+            element.innerHTML = randomNumbers.splice((Math.floor(Math.random() * randomNumbers.length)), 1);
+            element.addEventListener("click", checkNumbers);
+            element.style.textIndent = "-999px";
+        });
+
+        function checkNumbers() {
+            if (this.style.backgroundColor !== "red") {
+                selection.push(this);
+                this.style.backgroundColor = "red";
+                this.style.textIndent = "";
+                if ((selection.length === 2) && (selection[0].innerHTML === selection[1].innerHTML)) {
+                    selection[0].style.backgroundColor = "green";
+                    selection[0].removeEventListener("click", checkNumbers);
+                    selection[1].style.backgroundColor = "green";
+                    selection[1].removeEventListener("click", checkNumbers);
+                    selection = [];
+                }
+                else if (selection.length === 3) {
+                    selection[0].style.backgroundColor = "";
+                    selection[0].style.textIndent = "-999px";
+                    selection[1].style.backgroundColor = "";
+                    selection[1].style.textIndent = "-999px";
+                    selection.splice(0, 2);
+                }
+            }
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
