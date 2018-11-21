@@ -224,6 +224,7 @@ function hideBox(id) {
 
 function startGame() {
     if (gameInProgress) return false
+    table = [];
     table = generateTable(config.tableWidth, config.tableHeight);
     drawTable("game-box", config.tableHeight, config.tableWidth);
     gameInProgress = true;
@@ -274,9 +275,8 @@ function endGame() {
 
 function restartGame() {
     if (gameInProgress) {
-        if (endGame()) {
-            startGame();
-        }
+        endGame();
+        startGame();
     }
 }
 
