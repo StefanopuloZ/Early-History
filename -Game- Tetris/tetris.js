@@ -1,12 +1,6 @@
 let shapes = {
     shapeColor: function (shape) {
-        if (shape === "I") return "I"
-        if (shape === "O") return "O"
-        if (shape === "T") return "T"
-        if (shape === "S") return "S"
-        if (shape === "Z") return "Z"
-        if (shape === "L") return "L"
-        if (shape === "J") return "J"
+        return shape
     },
     I: [
         [
@@ -199,6 +193,7 @@ function highScoreInput(player, score, lines, figures) {
 }
 
 function viewHighScore() {
+    paused = true;
     highScore = JSON.parse(localStorage.getItem("HighScore"));
     let scoreTest = "<table id=high-score-table><th>Player: </th><th>Score: </th><th>Lines: </th><th>Figures: </th>";
     if (highScore !== null) {
@@ -218,6 +213,7 @@ function showBox(id) {
 }
 
 function hideBox(id) {
+    paused = false;
     document.getElementById(id).classList.remove("visible");
     document.getElementById(id).classList.add("hidden");
 }
@@ -517,7 +513,7 @@ function checkForGameEnd(shapePosition, shape) {
                 alert("This is the end!");
                 playerFail = true;
                 endGame();
-                return false
+                return 
             }
         }
         counter += 4;
