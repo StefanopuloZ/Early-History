@@ -3,6 +3,9 @@
     margin: 0;
     padding: 0;
 }
+table {
+    border-collapse: collapse;
+}
 body {
     text-align: center;
     background: black url("images/rsz_background.jpg") center no-repeat;
@@ -94,8 +97,6 @@ main {
     font-size: 1.2vw;
     font-weight: bolder;
     text-shadow: -1px -1px 1px white;
-    user-select: none;
-    -moz-user-select: none;
     transition: all ease 800ms;
 }
 .button:hover {
@@ -111,8 +112,6 @@ main {
     justify-content: center;
     align-content: center;
     border-radius: 10px;
-    user-select: none;
-    -moz-user-select: none;
 }
 .cell {
     width: 33%;
@@ -124,6 +123,7 @@ main {
     border-radius: 4%;
 }
 #stamp {
+    z-index: 100;
     position: absolute;
     color: red;
     transform: rotate(-40deg);
@@ -164,8 +164,232 @@ main {
 #cell8 {
     border-width: 4px 0 0 4px;   
 }
+#game-log-load {
+    padding: 1%;
+    position: absolute;
+    width: 100%;
+    border-radius: 4%;
+    font-size: 1.3vw;
+    background-color: rgba(73, 73, 73, 0.9);
+    border: 2px solid rgb(54, 54, 54);
+    border-style: outset;
+    top: 30%;
+    left: 55%;
+}
+#game-log-load button {
+    position: relative;
+    left: -30%;
+    width: 7%;
+    margin: 3% 5% 0 5%;
+    border-radius: 30%;
+    background-color: rgba(94, 94, 94, 0.7);
+    border: 3px solid rgb(70, 70, 70);
+    border-style: outset;
+    font-size: 1vw;
+    font-weight: 400;
+    text-shadow: -1px -1px 1px white;
+    transition: all ease 800ms;
+}
+#game-log-load button:hover {
+    background-color: rgba(165, 165, 165, 0.9);
+    transition: all ease 800ms;
+}
+#game-log-load table td{
+    padding: 0 30px;
+}
+#game-log-load table tr {
+    border: 5px solid rgba(255, 255, 255, 0);
+    padding: 10px;
+}
+#game-log-load table tr:nth-child(even) {
+    background-color: rgba(128, 128, 128, 0.45);
+}
+#game-log-load table tr:nth-child(n + 2):hover {
+    background-color: rgba(170, 57, 57, 0.507);
+}
+#game-log {
+    padding: 1%;
+    position: absolute;
+    width: 100%;
+    border-radius: 4%;
+    font-size: 1.3vw;
+    background-color: rgba(73, 73, 73, 0.9);
+    border: 2px solid rgb(54, 54, 54);
+    border-style: outset;
+    top: 30%;
+    left: 55%;
+}
+#game-log button {
+    position: relative;
+    left: -30%;
+    width: 7%;
+    margin: 3% 5% 0 5%;
+    border-radius: 30%;
+    background-color: rgba(94, 94, 94, 0.7);
+    border: 3px solid rgb(70, 70, 70);
+    border-style: outset;
+    font-size: 1vw;
+    font-weight: 400;
+    text-shadow: -1px -1px 1px white;
+    transition: all ease 800ms;
+}
+#game-log button:hover {
+    background-color: rgba(165, 165, 165, 0.9);
+    transition: all ease 800ms;
+}
+#game-log table td{
+    padding: 0 30px;
+}
+#game-log table tr {
+    border: 5px solid rgba(255, 255, 255, 0);
+    padding: 10px;
+}
+#game-log table tr:nth-child(even) {
+    background-color: rgba(128, 128, 128, 0.45);
+}
+#game-log table tr:nth-child(n + 2):hover {
+    background-color: rgba(170, 57, 57, 0.507);
+}
+#controls {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    background: rgba(128, 128, 128, 0.3);
+    border: 2px solid rgb(54, 54, 54);
+    border-style: outset;
+    border-radius: 5%;
+    top: 88%;
+    width: 30%;
+    left: 0%;
+    opacity: 0;
+    font-size: 1.5vw;
+    position: absolute;
+}
+.controls-btn {
+    width: 10%;
+    border-radius: 15%;
+    background-color: rgba(94, 94, 94, 0.7);
+    border: 2px solid rgb(70, 70, 70);
+    border-style: outset;
+    font-weight: 400;
+    text-shadow: -1px -1px 1px white;
+    transition: all ease 800ms;
+}
+.controls-btn:hover {
+    background-color: rgba(165, 165, 165, 0.9);
+    transition: all ease 800ms;
+}
 
-/* JS classes */
+/* JS CSS classes */
+.pop-up {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    left: 45%;
+    top: 25%;
+    min-height: 100px;
+    font-size: 1.1vw;
+    width: 200px;
+    border-radius: 10%;
+    background-color: rgba(134, 134, 134, 0.8);
+    border: 2px solid rgb(85, 85, 85);
+    border-style: outset;
+    font-weight: 400;
+    text-shadow: 0px 0px 0px rgb(37, 37, 37);
+    animation: shake 500ms ease 1;
+}
+.pop-btn {
+    width: 40px;
+    border-radius: 15%;
+    background-color: rgba(94, 94, 94, 0.7);
+    border: 2px solid rgb(70, 70, 70);
+    border-style: outset;
+    font-weight: 400;
+    text-shadow: -1px -1px 1px white;
+    transition: all ease 800ms;
+}
+.pop-btn:hover {
+    background-color: rgba(165, 165, 165, 0.9);
+    transition: all ease 800ms;
+}
+.from-right {
+    animation: from-right 1500ms ease 1 normal;
+}
+.fade-to-right {
+    animation: fade-to-right 1500ms ease 1 normal;
+}
+.controls-show {
+    animation: controls-show 1500ms ease 1 forwards;
+}
+.controls-hide {
+    animation: controls-hide 1500ms ease 1 forwards;
+}
+@keyframes controls-show{
+    0% {
+        left: -38%;
+        opacity: 0;
+    }
+    100% {
+        left: 17%;
+        opacity: 1;
+    }
+}
+@keyframes controls-hide{
+    0% {
+        left: 17%;
+        opacity: 1;
+    }
+    100% {
+        left: -38%;
+        opacity: 0;
+    }
+}
+@keyframes shake {
+    0% {
+        opacity: 0;
+    }
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+    60% {
+        opacity: 1;
+    }
+  }
+@keyframes from-right {
+    0% {
+        opacity: 0;
+        left: 100%;
+    }
+    100% {
+        opacity: 1;
+        left: 55%;
+    }
+}
+@keyframes fade-to-right {
+    0% {
+        opacity: 1;
+        left: 55%;
+    }
+    100% {
+        opacity: 0;
+        left: 100%;
+    }
+}
 .fade {
     animation: fade 2000ms ease 1 normal;
 }
@@ -182,7 +406,7 @@ main {
 }
 @keyframes stamp {
     0% {
-        font-size: 20vw;
+        font-size: 18vw;
         text-shadow: 50px 50px 100px rgb(20, 20, 20);
     }
     100% {

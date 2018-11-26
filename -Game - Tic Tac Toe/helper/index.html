@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tetris</title>
+    <link rel="stylesheet" href="tetris.css">
+</head>
+
+<body>
+    <div id="main-wrapper">
+        <nav id="menu">
+            <div id="nav">
+                <button id="start">Start Game</button>
+                <button id="high-score-btn">High Score</button>
+                <button id="end">End Game</button>
+                <button id="reset">Restart Game</button>
+            </div>
+        </nav>
+        <div id="game-area">
+            <div id="left-game-area">
+                <div id="score" class="score">Score: 0</div>
+                <div id="lines" class="score">Lines: 0</div>
+                <div id="figures" class="score">Fugures: 0</div>
+            </div>
+            <div id="game-box"></div>
+            <div id="right-game-area">
+                <div class="next">
+                    <p>Next:</p>
+                    <div id="next-figure"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="high-score-wrapper" class="hidden">
+        <div id="high-score">
+            <button id="hide-high-score-btn">X</button>
+            <div id="table-wrapper">
+                <table>
+                    <tr>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="tetris.js"></script>
+
+</body>
+
+</html>
