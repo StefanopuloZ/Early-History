@@ -63,6 +63,7 @@ function startGame() {
     seconds = 0;
     minutes = 0;
     gameInfo.turn = 0;
+    gameInfo.winner = "";
     document.getElementById("turn").innerHTML = setTurn();
     gameInfo.time = new Date();
     currentSign = "X";
@@ -97,14 +98,14 @@ function moveFlow(event) {
         else ++player2Score
         setScore();
         endGame();
-        return
+        return true
     };
     if (gameInfo.turn === 9) {
         addStamp("Draw!");
         gameInfo.winner = "Draw";
         gameLog.winner = "Draw";
         endGame();
-        return
+        return true
     }
     currentPlayer = (currentPlayer === player1Name) ? player2Name : player1Name;
     showCurrentPlayer(currentPlayer);
@@ -431,8 +432,9 @@ function killPop(event) {
 }
 
 function saveGame() {
+    if (!gameInProgress) return popUp("Can not save game right now.")
     saveGameLog("Saved Games");
-    console.log("game saved");
+    return popUp("Game Saved.");
 }
 
 function loadGame() {
@@ -496,21 +498,25 @@ function selectSavedGame(event) {
     clearTable();
     document.getElementById("play-area").addEventListener("click", moveFlow);
     moveHistory = loadedGame.turnHistory;
-    console.log(loadedGame);
-    console.log(moveHistory);
     gameLog = loadedGame;
+    player1Score = 0;
+    player2Score = 0;
+    setScore();
     totalTime = loadGame.time;
     seconds = 0;
     minutes = 0;
-    gameInfo.turn = loadedGame.turn;
+    gameInfo.turn = loadedGame.numberOfTurns;
+    gameInfo.winner = "";
     document.getElementById("turn").innerHTML = setTurn();
     gameInfo.time = new Date();
-    currentSign = (loadedGame.length % 2 === 0) ? "O" : "X";
+    currentSign = (moveHistory[moveHistory.length - 1].sign === "X") ? "O" : "X";
     player1Name = loadedGame.player1;
     player2Name = loadedGame.player2;
     document.getElementById("player1").innerHTML = player1Name;
     document.getElementById("player2").innerHTML = player2Name;
     currentPlayer = (moveHistory[moveHistory.length - 1].playerName === player1Name) ? player2Name : player1Name;
+    firstPlayer = (moveHistory[0].playerName === player1Name) ? player2Name : player1Name;
+    changeFirstPlayer();
     showCurrentPlayer(currentPlayer);
     for (let i = 0; i < 9; i++) {
         tableCheck[i] = i;
