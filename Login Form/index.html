@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Login Form</h1>
+
+    <div id="main">
+        <form action="" method="POST" id="register-form">
+            <h2>Register</h2>
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username-reg"><br>
+            <label for="pass">Password: </label>
+            <input type="password" name="pass" id="pass-reg"><br>
+            <label for="confirm-pass">Confirm password: </label>
+            <input type="password" name="confirm-pass" id="confirm-pass"><br>
+            <label for="security-question">Security question: </label><br>
+            <select name="security-question" id="security-question" >
+                    <option value="Your mother`s middle name">Your mother`s middle name</option>
+                    <option value="Your first pet`s name">Your first pet`s name</option>
+                    <option value="Name of your first love">Name of your first love</option>
+                    <option value="Name of your primary school favorite teacher">Name of your primary school favorite teacher</option>
+            </select><br>
+            <label for="security-question-answer">Answer: </label>
+            <input type="text" name="security-question-answer" id="security-question-answer"><br>
+            <button type="submit" id="register-form-btn">Register</button>
+        </form>
+
+        <form action="" method="GET" id="login-form">
+            <h2>Login</h2>
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username"><br>
+            <label for="pass">Password: </label>
+            <input type="password" name="pass" id="pass"><br>
+            <button type="submit" id="submit-btn">Login</button>
+        </form>
+
+        <p><a href="" id="forgot-pass">Forgot password?</a></p>
+
+        <p>Not registered? <a href="" id="register">Register</a></p>
+    </div>
+
+    <div id="logged-user"></div>
+    <button id="log-out">Log Out</button>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

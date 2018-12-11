@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1 id="greeting">You need to be logged in to view this page</h1>
+
+    <div id="main">Not logged in. This is empty.</div>
+
+    <button id="log-out">Log Out </button>
+
+    <a href="index.html">Log in </a> ||
+
+    <a href="logged.html">Main </a>
+
+    <div id="security-question-edit" class="pop-hide">
+        <div class="pop-btn">X</div>
+        <form action="" method="GET">
+            <label for="security-question">Security question: </label><br>
+            <select name="security-question" id="security-question">
+                <option value="Your mother`s middle name">Your mother`s middle name</option>
+                <option value="Your first pet`s name">Your first pet`s name</option>
+                <option value="Name of your first love">Name of your first love</option>
+                <option value="Name of your primary school favorite teacher">Name of your primary school favorite
+                    teacher</option>
+            </select><br>
+            <label for="security-question-answer">Answer: </label>
+            <input type="text" name="security-question-answer" id="security-question-answer"><br>
+            <button type="submit" id="submit-edit">Submit</button>
+        </form>
+    </div>
+
+    <div id="gender-edit" class="pop-hide">
+        <div class="pop-btn">X</div>
+        <form action="" method="POST">
+            <label for="security-question">Select gender:</label><br>
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            <input type="radio" name="gender" value="other"> Other<br>
+            <button type="submit" id="submit-edit-gender">Submit</button>
+        </form>
+    </div>
+
+    <div id="dob-edit" class="pop-hide">
+        <div class="pop-btn">X</div>
+        <form action="" method="POST">
+            <label for="date">Birthday: </label><br>
+            <input type="date" name="dob" id="dob"><br>
+            <button type="submit" id="submit-edit-dob">Submit</button>
+        </form>
+    </div>
+
+    <div id="interests-edit" class="pop-hide">
+        <div class="pop-btn">X</div>
+        <form action="" method="POST">
+            <input type="checkbox" name="interests" value="Books"> Books<br>
+            <input type="checkbox" name="interests" value="Cars"> Cars<br>
+            <input type="checkbox" name="interests" value="History"> History<br>
+            <input type="checkbox" name="interests" value="Shows"> Shows<br>
+            <input type="checkbox" name="interests" value="Movies"> Movies<br>
+            <input type="checkbox" name="interests" value="Nightlife"> Nightlife<br>
+            <input type="checkbox" name="interests" value="Hiking"> Hiking<br>
+            <input type="checkbox" name="interests" value="Music"> Music<br>
+            <input type="checkbox" name="interests" value="Coding"> Coding<br>
+            <input type="checkbox" name="interests" value="Spirituality"> Spirituality<br>
+            Other: <br><input type="text" name="interests-other"><br>
+            <button type="submit" id="submit-interests-edit">Submit</button>
+        </form>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
