@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 30px;
+}
+body {
+    background-color: gray;
+}
+.cell {
+    color: white;
+    width: 50px;
+    height: 50px;
+    border: solid 1px black;
+    position: relative;
+}
+.cell-x {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+.main-cell {
+    line-height: 20px;
+    background-color: rgb(56, 1, 1);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: solid 1px black;
+}
+#screen {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 150px;
+    margin: auto;
+    height: 200px;
+    border: 1px solid red;
+}
+.roll {
+    animation: roll linear 1;
+}
+@keyframes roll {
+    0% {
+        top: 0px;
+    }
+    100% {
+        top: 50px;
+    }
+}
+.wheel {
+    position: relative;
+    top: -50px;
+}
+
+
+
+
+
