@@ -42,15 +42,15 @@ td {
     color: green;
 }
 .active {
-    background-color: pink;
+    background-color: rgb(255, 160, 176) !important;
 }
 .avilable-moves {
-    background-color: rgb(255, 226, 231);
+    background-color: rgb(255, 201, 210) !important;
 }
 #table-area tr:nth-of-type(odd) td:nth-of-type(odd) {
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(230, 230, 230);
 }
 #table-area tr:nth-of-type(even) td:nth-of-type(even) {
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(230, 230, 230);
 }
 
