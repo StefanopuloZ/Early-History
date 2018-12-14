@@ -24,8 +24,8 @@ let pieces = {
         white: '♔'
     }
 },
-    //table = fenToPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'),
-    table = fenToPosition('4k2r/8/8/8/4Q3/8/3R4/8'),
+    table = fenToPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'),
+    //table = fenToPosition('4k2r/8/8/8/4Q3/8/3R4/8'),
     //table = fenToPosition('r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R'),
     selected = {
         from: -1,
