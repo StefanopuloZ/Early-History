@@ -4,7 +4,6 @@ let selectedPiece = "",
     plannedMove = "",
     playerColor = "white",
     validMoves = [],
-    checkingFigures = [],
     ampasant = null,
     castlingTrack = [
         {
@@ -17,7 +16,9 @@ let selectedPiece = "",
             left: true,
             right: true
         },
-    ];
+    ],
+    checkingFigures = [];
+ 
 
 
 
@@ -52,9 +53,6 @@ function moveFlow(event) {
             selectedPiece = "";
             playerColor = (playerColor === "white") ? "black" : "white";
             validMoves = [];
-            if (check(plannedMove)) {
-                console.log("Check!");
-            }
         } else {
             console.log("Invalid move.");
             selectedPiece = "";
@@ -77,22 +75,12 @@ function showValidMoves(id, checkForCheck) {
 }
 
 function validMove(start, end) {
-    console.log(start, end, table[start], table[end]);
-    if (validMoves.indexOf(parseInt(end)) === -1) {
+    if (validMoves.indexOf(parseInt(end)) === -1 || check(start, end)) {
         return false
     }
     checkAmpasant(start, end);
     checkCastle(start, end);
     return true;
-}
-
-function check(id) {
-    showValidMoves(id, true);
-    if (checkingFigures.length !== 0) {
-        return true
-    } else {
-        return false
-    }
 }
 
 /////////////// figure rules ///////////////
@@ -261,7 +249,6 @@ function queenRules(id, checkForCheck) {
     for (let i = 1; i < 9; i++) {
         if (table[id + i * 9] === undefined) break
         if (table[id + i * 9].color === color) break
-        console.log(id, table[id + i * 9]);
         if (!validDiagnoal(id, id + i * 9)) break
         drawMovesAndValidate(id + i * 9, id, checkForCheck);
         if (table[id + i * 9].color === opponentColor) break
@@ -433,12 +420,32 @@ function drawMovesAndValidate(id, pieceId, checkForCheck) {
     } else {
         if (table[id].piece === "king") {
             checkingFigures.push({
-                id: pieceId,
-                color: table[pieceId].color,
+                id: id,
                 piece: table[pieceId].piece
             })
         }
     }
+}
+
+function check(start, end) {
+    let piece = table[start];
+    let color = piece.color;
+    table[end] = piece;
+    table[start] = {};
+    table.forEach((cell, id) => {
+        if (Object.keys(cell).length > 0 && cell.color !== color) {
+            showValidMoves(id, true);
+        }
+    });
+    table[end] = {};
+    table[start] = piece;
+    if (checkingFigures.length > 0) {
+        console.log("Must prevent check!");
+        console.log(checkingFigures);
+        checkingFigures = [];
+        return true
+    }
+    return false
 }
 
 function convertCell(id) {
@@ -509,6 +516,9 @@ function checkEmpty(start, end) {
 
 function checkPromotion(start, end) {
     let a = convertCell(end);
+    if (table[start].piece !== "pawn") {
+        return
+    }
     if (table[start].color === "white") {
         if (a[1] === 0) {
             table[end] = {
