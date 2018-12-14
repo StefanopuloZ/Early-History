@@ -47,3 +47,10 @@ td {
 .avilable-moves {
     background-color: rgb(255, 226, 231);
 }
+#table-area tr:nth-of-type(odd) td:nth-of-type(odd) {
+    background-color: rgb(211, 211, 211);
+}
+#table-area tr:nth-of-type(even) td:nth-of-type(even) {
+    background-color: rgb(211, 211, 211);
+}
+
