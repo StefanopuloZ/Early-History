@@ -4,7 +4,8 @@ let selectedPiece = "",
     plannedMove = "",
     playerColor = "white",
     validMoves = [],
-    checkingFigures = [];
+    checkingFigures = [],
+    ampasant = null;
 
 
 
@@ -32,7 +33,8 @@ function moveFlow(event) {
     } else {
         plannedMove = id;
         if (validMove(selectedPiece, plannedMove)) {
-            table[plannedMove] = table[selectedPiece]
+            table[plannedMove] = table[selectedPiece];
+            checkPromotion(selectedPiece, plannedMove);
             table[selectedPiece] = {};
             selectedPiece = "";
             playerColor = (playerColor === "white") ? "black" : "white";
@@ -66,6 +68,7 @@ function validMove(start, end) {
     if (validMoves.indexOf(parseInt(end)) === -1) {
         return false
     }
+    checkAmpasant(start, end);
     return true;
 }
 
@@ -350,13 +353,13 @@ function pawnRules(id, checkForCheck) {
         // eating
         for (let i = 1; i < 2; i++) {
             if (table[id - 7] === undefined) break
-            if (table[id - 7].color !== opponentColor) break
+            if (table[id - 7].color !== opponentColor && id - 7 !== ampasant) break
             if (!validDiagnoal(id, id - i * 7)) break
             drawMovesAndValidate(id - i * 7, id, checkForCheck);
         }
         for (let i = 1; i < 2; i++) {
             if (table[id - 9] === undefined) break
-            if (table[id - 9].color !== opponentColor) break
+            if (table[id - 9].color !== opponentColor && id - 9 !== ampasant) break
             if (!validDiagnoal(id, id - i * 9)) break
             drawMovesAndValidate(id - i * 9, id, checkForCheck);
         }
@@ -370,14 +373,14 @@ function pawnRules(id, checkForCheck) {
         // eating
         for (let i = 1; i < 2; i++) {
             if (table[id + 7] === undefined) break
-            if (table[id + 7].color !== opponentColor) break
+            if (table[id + 7].color !== opponentColor && id + 7 !== ampasant) break
             if (!validDiagnoal(id, id + i * 7)) break
             drawMovesAndValidate(id + i * 7, id, checkForCheck);
         }
 
         for (let i = 1; i < 2; i++) {
             if (table[id + 9] === undefined) break
-            if (table[id + 9].color !== opponentColor) break
+            if (table[id + 9].color !== opponentColor && id + 9 !== ampasant) break
             if (!validDiagnoal(id, id + i * 9)) break
             drawMovesAndValidate(id + i * 9, id, checkForCheck);
         }
@@ -408,6 +411,46 @@ function drawMovesAndValidate(id, pieceId, checkForCheck) {
 
 function convertCell(id) {
     return [id % 8, Math.floor(id / 8)]
+}
+
+function checkPromotion(start, end) {
+    let a = convertCell(end);
+    if (table[start].color === "white") {
+        if (a[1] === 0) {
+            table[end] = {
+                color: "white",
+                piece: "queen"
+            }
+        }
+    } else {
+        if (a[1] === 7) {
+            table[end] = {
+                color: "black",
+                piece: "queen"
+            }
+        }
+    }
+}
+
+function checkAmpasant(start, end) {
+    end = parseInt(end);
+    if (table[start].piece === "pawn" && end === ampasant) {
+        if (table[start].color === "white") {
+            table[end + 8] = {}
+        } else {
+            table[end - 8] = {}
+        }
+    }
+    if (table[start].piece === "pawn" && Math.abs(start - end) > 8) {
+        ampasant = setAmpasant(start);
+    } else {
+        ampasant = null;
+    }
+}
+
+function setAmpasant(id) {
+    id = parseInt(id);
+    return (table[id].color === "white") ? id - 8 : id + 8
 }
 
 function firstMove(id, color) {
