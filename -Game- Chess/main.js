@@ -5,7 +5,19 @@ let selectedPiece = "",
     playerColor = "white",
     validMoves = [],
     checkingFigures = [],
-    ampasant = null;
+    ampasant = null,
+    castlingTrack = [
+        {
+            king: true,
+            left: true,
+            right: true
+        },
+        {
+            king: true,
+            left: true,
+            right: true
+        },
+    ];
 
 
 
@@ -35,6 +47,7 @@ function moveFlow(event) {
         if (validMove(selectedPiece, plannedMove)) {
             table[plannedMove] = table[selectedPiece];
             checkPromotion(selectedPiece, plannedMove);
+            updateCastling(selectedPiece);
             table[selectedPiece] = {};
             selectedPiece = "";
             playerColor = (playerColor === "white") ? "black" : "white";
@@ -69,6 +82,7 @@ function validMove(start, end) {
         return false
     }
     checkAmpasant(start, end);
+    checkCastle(start, end);
     return true;
 }
 
@@ -173,6 +187,24 @@ function kingRules(id, checkForCheck) {
         drawMovesAndValidate(id + i * 9, id, checkForCheck);
         if (table[id + i * 9].color === opponentColor) break
         break
+    }
+    // castling
+    if (table[id].color === "white" && castlingTrack[0].king) {
+        if (castlingTrack[0].left && checkEmpty(57, 59)) {
+            drawMovesAndValidate(58, id, checkForCheck);
+        }
+        if (castlingTrack[0].right && checkEmpty(61, 62)) {
+            drawMovesAndValidate(62, id, checkForCheck);
+        }
+    } else {
+        if (castlingTrack[1].king) {
+            if (castlingTrack[1].left && checkEmpty(1, 3)) {
+                drawMovesAndValidate(2, id, checkForCheck);
+            }
+            if (castlingTrack[1].right && checkEmpty(5, 6)) {
+                drawMovesAndValidate(6, id, checkForCheck);
+            }
+        }
     }
 }
 
@@ -411,6 +443,68 @@ function drawMovesAndValidate(id, pieceId, checkForCheck) {
 
 function convertCell(id) {
     return [id % 8, Math.floor(id / 8)]
+}
+
+function updateCastling(start) {
+    start = parseInt(start);
+    if (table[start].piece !== "rook" && table[start].piece !== "king") {
+        return
+    }
+    if (table[start].color === "white") {
+        if (start === 56) castlingTrack[0].left = false
+        if (start === 63) castlingTrack[0].right = false
+        if (start === 60) castlingTrack[0].king = false
+    } else {
+        if (start === 0) castlingTrack[1].left = false
+        if (start === 7) castlingTrack[1].right = false
+        if (start === 4) castlingTrack[1].king = false
+    }
+}
+
+function checkCastle(start, end) {
+    start = parseInt(start);
+    end = parseInt(end);
+    if (table[start].piece !== "king" || Math.abs(start - end) < 2) return
+    if (table[start].color === "white") {
+        if (end === 58) {
+            table[56] = {};
+            table[59] = {
+                color: "white",
+                piece: "rook"
+            }
+        }
+        if (end === 62) {
+            table[63] = {};
+            table[61] = {
+                color: "white",
+                piece: "rook"
+            }
+        }
+    } else {
+        if (end === 2) {
+            table[0] = {};
+            table[3] = {
+                color: "black",
+                piece: "rook"
+            }
+        }
+        if (end === 6) {
+            table[7] = {};
+            table[5] = {
+                color: "black",
+                piece: "rook"
+            }
+        }
+    }
+}
+
+function checkEmpty(start, end) {
+    for (let i = start; i <= end; i++) {
+        if (Object.keys(table[i]).length !== 0) {
+            return false
+        }
+    }
+    return true
 }
 
 function checkPromotion(start, end) {
