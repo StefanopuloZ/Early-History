@@ -18,7 +18,7 @@ let selectedPiece = "",
         },
     ],
     checkingFigures = [];
- 
+
 
 
 
@@ -53,6 +53,9 @@ function moveFlow(event) {
             selectedPiece = "";
             playerColor = (playerColor === "white") ? "black" : "white";
             validMoves = [];
+            if (check(plannedMove, plannedMove, true)) {
+                console.log("Check!");
+            }
         } else {
             console.log("Invalid move.");
             selectedPiece = "";
@@ -75,7 +78,10 @@ function showValidMoves(id, checkForCheck) {
 }
 
 function validMove(start, end) {
-    if (validMoves.indexOf(parseInt(end)) === -1 || check(start, end)) {
+    if (validMoves.indexOf(parseInt(end)) === -1) {
+        return false
+    } else if (check(start, end, false)) {
+        console.log("Must prevent check!");
         return false
     }
     checkAmpasant(start, end);
@@ -427,11 +433,15 @@ function drawMovesAndValidate(id, pieceId, checkForCheck) {
     }
 }
 
-function check(start, end) {
+function check(start, end, justCheck) {
     let piece = table[start];
     let color = piece.color;
-    table[end] = piece;
-    table[start] = {};
+    if (justCheck) {
+        color = (color === "white") ? "black" : "white";
+    } else {
+        table[end] = piece;
+        table[start] = {};
+    }
     table.forEach((cell, id) => {
         if (Object.keys(cell).length > 0 && cell.color !== color) {
             showValidMoves(id, true);
@@ -440,8 +450,6 @@ function check(start, end) {
     table[end] = {};
     table[start] = piece;
     if (checkingFigures.length > 0) {
-        console.log("Must prevent check!");
-        console.log(checkingFigures);
         checkingFigures = [];
         return true
     }
