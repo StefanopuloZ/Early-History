@@ -434,21 +434,22 @@ function drawMovesAndValidate(id, pieceId, checkForCheck) {
 }
 
 function check(start, end, justCheck) {
-    let piece = table[start];
-    let color = piece.color;
+    let first = table[start];
+    let second = table[end];
+    let color = first.color;
     if (justCheck) {
         color = (color === "white") ? "black" : "white";
     } else {
-        table[end] = piece;
-        table[start] = {};
+        table[end] = first;
+        table[start] = second;
     }
     table.forEach((cell, id) => {
         if (Object.keys(cell).length > 0 && cell.color !== color) {
             showValidMoves(id, true);
         }
     });
-    table[end] = {};
-    table[start] = piece;
+    table[end] = second;
+    table[start] = first;
     if (checkingFigures.length > 0) {
         checkingFigures = [];
         return true
