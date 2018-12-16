@@ -50,7 +50,9 @@ function moveFlow(event) {
             selectedPiece = "";
             playerColor = (playerColor === "white") ? "black" : "white";
             validMoves = [];
-            if (check(plannedMove, plannedMove, true)) {
+            if (checkMate()) {
+                alert("Checkmate!");
+            } else if (check(plannedMove, plannedMove, true)) {
                 console.log("Check!");
             }
         } else {
@@ -213,6 +215,25 @@ function pawnMoves(id) {
 }
 
 // other functions
+
+function checkMate() {
+    let validMoves = [];
+    let pieceMoves = [];
+    table.forEach((cell, id) => {
+        if (cell.color === playerColor) {
+            console.log(cell);
+            pieceMoves = showValidMoves(id);
+            pieceMoves = pieceMoves.filter((element, index, arr) => {
+                return !check(id, element, false)
+            });
+            console.log(pieceMoves);
+            validMoves.push(...pieceMoves);
+        }
+    });
+    console.log(validMoves);
+    if (validMoves.length === 0) return true
+    else return false
+}
 
 function drawMoves(moves) {
     moves.map(element => {
