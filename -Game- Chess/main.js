@@ -16,26 +16,23 @@ let selectedPiece = "",
             left: true,
             right: true
         },
-    ],
-    checkingFigures = [];
-
-
-
+    ];
 
 /////////////// main code ///////////////
 
 drawBoard();
 document.getElementById("table-area").addEventListener("click", moveFlow);
 
-
 /////////////// methods ///////////////
+
+///// Start of main function ///////
 
 function moveFlow(event) {
     let cell = (event.target.tagName !== "TD") ? event.target.parentNode : event.target;
     let id = cell.id.slice(5);
     if (table[id].color !== playerColor && selectedPiece === "" && Object.keys(table[id]).length > 0) {
         console.log("Invalid piece selected");
-        return
+        return false
     }
     if (selectedPiece === "") {
         if (!table[id].color) {
@@ -59,33 +56,38 @@ function moveFlow(event) {
         } else {
             console.log("Invalid move.");
             selectedPiece = "";
+            validMoves = [];
         }
     }
     drawBoard();
     if (selectedPiece !== "") {
         document.getElementById("cell-" + id).classList.add("active");
-        showValidMoves(id, false);
+        validMoves.push(...showValidMoves(id));
+        drawMoves(validMoves);
     }
 };
+/////// End of main function ////
 
-function showValidMoves(id, checkForCheck) {
-    if (table[id].piece === "rook") rookRules(id, checkForCheck)
-    else if (table[id].piece === "king") kingRules(id, checkForCheck)
-    else if (table[id].piece === "queen") queenRules(id, checkForCheck)
-    else if (table[id].piece === "bishop") bishopRules(id, checkForCheck)
-    else if (table[id].piece === "knight") knightRules(id, checkForCheck)
-    else if (table[id].piece === "pawn") pawnRules(id, checkForCheck)
+function showValidMoves(id) {
+    if (table[id].piece === "rook") return rookMoves(id)
+    else if (table[id].piece === "king") return kingMoves(id)
+    else if (table[id].piece === "queen") return queenMoves(id)
+    else if (table[id].piece === "bishop") return bishopMoves(id)
+    else if (table[id].piece === "knight") return knightMoves(id)
+    else if (table[id].piece === "pawn") return pawnMoves(id)
 }
 
 function validMove(start, end) {
     if (validMoves.indexOf(parseInt(end)) === -1) {
         return false
+    } else if (!checkCastle(start, end)) {
+        console.log("Can't castle. Figures are not free to move.");
+        return false;
     } else if (check(start, end, false)) {
         console.log("Must prevent check!");
         return false
-    }
+    };
     checkAmpasant(start, end);
-    checkCastle(start, end);
     return true;
 }
 
@@ -93,363 +95,155 @@ function validMove(start, end) {
 
 //rook
 
-function rookRules(id, checkForCheck) {
+function rookMoves(id) {
     id = parseInt(id);
     let color = table[id].color;
     let opponentColor = (color === "white") ? "black" : "white"
     let x = convertCell(id)[0];
     let y = convertCell(id)[1];
-    for (let i = 1; i < x + 1; i++) {
-        if (table[id - i].color === color) break
-        drawMovesAndValidate(id - i, id, checkForCheck);
-        if (table[id - i].color === opponentColor) break
-    }
-    for (let i = 1; i < 8 - x; i++) {
-        if (table[id + i].color === color) break
-        drawMovesAndValidate(id + i, id, checkForCheck);
-        if (table[id + i].color === opponentColor) break
-    }
-    for (let i = 1; i < y + 1; i++) {
-        if (table[id - i * 8].color === color) break
-        drawMovesAndValidate(id - i * 8, id, checkForCheck);
-        if (table[id - i * 8].color === opponentColor) break
-    }
-    for (let i = 1; i < 8 - y; i++) {
-        if (table[id + i * 8].color === color) break
-        drawMovesAndValidate(id + i * 8, id, checkForCheck);
-        if (table[id + i * 8].color === opponentColor) break
-    }
+    let moves = [];
+    let directions = [[x + 1, -1], [8 - x, 1], [y + 1, -8], [8 - y, 8]];
+
+    for (let i = 0; i < directions.length; i++) {
+        for (let j = 1; j < directions[i][0]; j++) {
+            if (table[id + j * directions[i][1]].color === color) break
+            moves.push(id + j * directions[i][1]);
+            if (table[id + j * directions[i][1]].color === opponentColor) break
+            if (table[id].piece === "king") break
+        }
+    };
+    return moves
 }
 
 //king
 
-function kingRules(id, checkForCheck) {
+function kingMoves(id) {
     id = parseInt(id);
-    let color = table[id].color;
-    let opponentColor = (color === "white") ? "black" : "white"
-    let x = convertCell(id)[0];
-    let y = convertCell(id)[1];
-    for (let i = 1; i < x + 1; i++) {
-        if (table[id - i].color === color) break
-        drawMovesAndValidate(id - i, id, checkForCheck);
-        if (table[id - i].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < 8 - x; i++) {
-        if (table[id + i].color === color) break
-        drawMovesAndValidate(id + i, id, checkForCheck);
-        if (table[id + i].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < y + 1; i++) {
-        if (table[id - i * 8].color === color) break
-        drawMovesAndValidate(id - i * 8, id, checkForCheck);
-        if (table[id - i * 8].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < 8 - y; i++) {
-        if (table[id + i * 8].color === color) break
-        drawMovesAndValidate(id + i * 8, id, checkForCheck);
-        if (table[id + i * 8].color === opponentColor) break
-        break
-    }
-    //diagonal
-    for (let i = 1; i < x + 1; i++) {
-        if (table[id - i * 7] === undefined) break
-        if (table[id - i * 7].color === color) break
-        drawMovesAndValidate(id - i * 7, id, checkForCheck);
-        if (table[id - i * 7].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < 8 - x; i++) {
-        if (table[id + i * 7] === undefined) break
-        if (table[id + i * 7].color === color) break
-        drawMovesAndValidate(id + i * 7, id, checkForCheck);
-        if (table[id + i * 7].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < y + 1; i++) {
-        if (table[id - i * 9] === undefined) break
-        if (table[id - i * 9].color === color) break
-        drawMovesAndValidate(id - i * 9, id, checkForCheck);
-        if (table[id - i * 9].color === opponentColor) break
-        break
-    }
-    for (let i = 1; i < 8 - y; i++) {
-        if (table[id + i * 9] === undefined) break
-        if (table[id + i * 9].color === color) break
-        drawMovesAndValidate(id + i * 9, id, checkForCheck);
-        if (table[id + i * 9].color === opponentColor) break
-        break
-    }
+    let moves = [];
+    moves = rookMoves(id).concat(bishopMoves(id));
+
     // castling
     if (table[id].color === "white" && castlingTrack[0].king) {
         if (castlingTrack[0].left && checkEmpty(57, 59)) {
-            drawMovesAndValidate(58, id, checkForCheck);
+            moves.push(58);
         }
         if (castlingTrack[0].right && checkEmpty(61, 62)) {
-            drawMovesAndValidate(62, id, checkForCheck);
+            moves.push(62);
         }
     } else {
         if (castlingTrack[1].king) {
             if (castlingTrack[1].left && checkEmpty(1, 3)) {
-                drawMovesAndValidate(2, id, checkForCheck);
+                moves.push(2);
             }
             if (castlingTrack[1].right && checkEmpty(5, 6)) {
-                drawMovesAndValidate(6, id, checkForCheck);
+                moves.push(6);
             }
         }
     }
+
+    return moves
 }
 
 //queen
 
-function queenRules(id, checkForCheck) {
-    id = parseInt(id);
-    let color = table[id].color;
-    let opponentColor = (color === "white") ? "black" : "white"
-    let x = convertCell(id)[0];
-    let y = convertCell(id)[1];
-    for (let i = 1; i < x + 1; i++) {
-        if (table[id - i].color === color) break
-        drawMovesAndValidate(id - i, id, checkForCheck);
-        if (table[id - i].color === opponentColor) break
-    }
-    for (let i = 1; i < 8 - x; i++) {
-        if (table[id + i].color === color) break
-        drawMovesAndValidate(id + i, id, checkForCheck);
-        if (table[id + i].color === opponentColor) break
-    }
-    for (let i = 1; i < y + 1; i++) {
-        if (table[id - i * 8].color === color) break
-        drawMovesAndValidate(id - i * 8, id, checkForCheck);
-        if (table[id - i * 8].color === opponentColor) break
-    }
-    for (let i = 1; i < 8 - y; i++) {
-        if (table[id + i * 8].color === color) break
-        drawMovesAndValidate(id + i * 8, id, checkForCheck);
-        if (table[id + i * 8].color === opponentColor) break
-    }
-    //diagnal
-    for (let i = 1; i < 9; i++) {
-        if (table[id - i * 7] === undefined) break
-        if (table[id - i * 7].color === color) break
-        if (!validDiagnoal(id, id - i * 7)) break
-        drawMovesAndValidate(id - i * 7, id, checkForCheck);
-        if (table[id - i * 7].color === opponentColor) break
-    }
-    for (let i = 1; i < 9; i++) {
-        if (table[id + i * 7] === undefined) break
-        if (table[id + i * 7].color === color) break
-        if (!validDiagnoal(id, id + i * 7)) break
-        drawMovesAndValidate(id + i * 7, id, checkForCheck);
-        if (table[id + i * 7].color === opponentColor) break
-    }
-    for (let i = 1; i < 9; i++) {
-        if (table[id - i * 9] === undefined) break
-        if (table[id - i * 9].color === color) break
-        if (!validDiagnoal(id, id - i * 9)) break
-        drawMovesAndValidate(id - i * 9, id, checkForCheck);
-        if (table[id - i * 9].color === opponentColor) break
-    }
-    for (let i = 1; i < 9; i++) {
-        if (table[id + i * 9] === undefined) break
-        if (table[id + i * 9].color === color) break
-        if (!validDiagnoal(id, id + i * 9)) break
-        drawMovesAndValidate(id + i * 9, id, checkForCheck);
-        if (table[id + i * 9].color === opponentColor) break
-    }
+function queenMoves(id) {
+    return rookMoves(id).concat(bishopMoves(id))
 }
 
 //bishop
 
-function bishopRules(id, checkForCheck) {
+function bishopMoves(id) {
     id = parseInt(id);
     let color = table[id].color;
     let opponentColor = (color === "white") ? "black" : "white"
-    let x = convertCell(id)[0];
-    let y = convertCell(id)[1];
-    //diagnal
-    for (let i = 1; i < 9; i++) {
-        if (table[id - i * 7] === undefined) break
-        if (table[id - i * 7].color === color) break
-        if (!validDiagnoal(id, id - i * 7)) break
-        drawMovesAndValidate(id - i * 7, id, checkForCheck);
-        if (table[id - i * 7].color === opponentColor) break
+    let moves = [];
+    let directions = [-7, 7, -9, 9];
+
+    for (let i = 0; i < directions.length; i++) {
+        for (let j = 1; j < 9; j++) {
+            if (table[id + (j * directions[i])] === undefined) break
+            if (table[id + (j * directions[i])].color === color) break
+            if (!validDiagnoal(id, id + (j * directions[i]))) break
+            moves.push(id + (j * directions[i]));
+            if (table[id + (j * directions[i])].color === opponentColor) break
+            if (table[id].piece === "king") break
+        }
     }
-    for (let i = 1; i < 9; i++) {
-        if (table[id + i * 7] === undefined) break
-        if (table[id + i * 7].color === color) break
-        if (!validDiagnoal(id, id + i * 7)) break
-        drawMovesAndValidate(id + i * 7, id, checkForCheck);
-        if (table[id + i * 7].color === opponentColor) break
-    }
-    for (let i = 1; i < 9; i++) {
-        if (table[id - i * 9] === undefined) break
-        if (table[id - i * 9].color === color) break
-        if (!validDiagnoal(id, id - i * 9)) break
-        drawMovesAndValidate(id - i * 9, id, checkForCheck);
-        if (table[id - i * 9].color === opponentColor) break
-    }
-    for (let i = 1; i < 9; i++) {
-        if (table[id + i * 9] === undefined) break
-        if (table[id + i * 9].color === color) break
-        if (!validDiagnoal(id, id + i * 9)) break
-        drawMovesAndValidate(id + i * 9, id, checkForCheck);
-        if (table[id + i * 9].color === opponentColor) break
-    }
+    return moves
 }
 
 //knight
 
-function knightRules(id, checkForCheck) {
+function knightMoves(id) {
     id = parseInt(id);
     let color = table[id].color;
-    let opponentColor = (color === "white") ? "black" : "white"
-    let x = convertCell(id)[0];
-    let y = convertCell(id)[1];
-    //above x-axis
-    for (let i = 1; i < 2; i++) {
-        if (table[id + 6] === undefined) break
-        if (table[id + 6].color === color) break
-        if (!validJump(id, id + 6)) break
-        drawMovesAndValidate(id + 6, id, checkForCheck);
+    let moves = [];
+    let directions = [6, 15, 10, 17, -6, -15, -10, -17];
+    for (let i = 0; i < directions.length; i++) {
+        if (table[id + directions[i]] === undefined) continue
+        if (table[id + directions[i]].color === color) continue
+        if (!validJump(id, id + directions[i])) continue
+        moves.push(id + directions[i]);
     }
-    for (let i = 1; i < 2; i++) {
-        if (table[id + 15] === undefined) break
-        if (table[id + 15].color === color) break
-        if (!validJump(id, id + 15)) break
-        drawMovesAndValidate(id + 15, id, checkForCheck);
-    }
-    for (let i = 1; i < 2; i++) {
-        if (table[id + 10] === undefined) break
-        if (table[id + 10].color === color) break
-        if (!validJump(id, id + 10)) break
-        drawMovesAndValidate(id + 10, id, checkForCheck);
-    }
-    for (let i = 1; i < 2; i++) {
-        if (table[id + 17] === undefined) break
-        if (table[id + 17].color === color) break
-        if (!validJump(id, id + 17)) break
-        drawMovesAndValidate(id + 17, id, checkForCheck);
-    }
-    //below x-axis
-    for (let i = 1; i < 2; i++) {
-        if (table[id - 6] === undefined) break
-        if (table[id - 6].color === color) break
-        if (!validJump(id, id - 6)) break
-        drawMovesAndValidate(id - 6, id, checkForCheck);
-    }
-    for (let i = 1; i < 2; i++) {
-        if (table[id - 10] === undefined) break
-        if (table[id - 10].color === color) break
-        if (!validJump(id, id - 10)) break
-        drawMovesAndValidate(id - 10, id, checkForCheck);
-    }
-    for (let i = 1; i < 2; i++) {
-        if (table[id - 15] === undefined) break
-        if (table[id - 15].color === color) break
-        if (!validJump(id, id - 15)) break
-        drawMovesAndValidate(id - 15, id, checkForCheck);
-    }
-    for (let i = 1; i < 2; i++) {
-        if (table[id - 17] === undefined) break
-        if (table[id - 17].color === color) break
-        if (!validJump(id, id - 17)) break
-        drawMovesAndValidate(id - 17, id, checkForCheck);
-    }
+    return moves
 }
 
 //pawn
 
-function pawnRules(id, checkForCheck) {
+function pawnMoves(id) {
     id = parseInt(id);
     let color = table[id].color;
-    let opponentColor = (color === "white") ? "black" : "white"
-    let x = convertCell(id)[0];
-    let y = convertCell(id)[1];
-    if (color === "white") {
-        for (let i = 1; i < 3; i++) {
-            if (table[id - i * 8] === undefined) break
-            if (table[id - i * 8].color === color || table[id - i * 8].color === opponentColor) break
-            drawMovesAndValidate(id - i * 8, id, checkForCheck);
-            if (!firstMove(id, color)) break
-        }
-        // eating
-        for (let i = 1; i < 2; i++) {
-            if (table[id - 7] === undefined) break
-            if (table[id - 7].color !== opponentColor && id - 7 !== ampasant) break
-            if (!validDiagnoal(id, id - i * 7)) break
-            drawMovesAndValidate(id - i * 7, id, checkForCheck);
-        }
-        for (let i = 1; i < 2; i++) {
-            if (table[id - 9] === undefined) break
-            if (table[id - 9].color !== opponentColor && id - 9 !== ampasant) break
-            if (!validDiagnoal(id, id - i * 9)) break
-            drawMovesAndValidate(id - i * 9, id, checkForCheck);
-        }
-    } else {
-        for (let i = 1; i < 3; i++) {
-            if (table[id + i * 8] === undefined) break
-            if (table[id + i * 8].color === color || table[id + i * 8].color === opponentColor) break
-            drawMovesAndValidate(id + i * 8, id, checkForCheck);
-            if (!firstMove(id, color)) break
-        }
-        // eating
-        for (let i = 1; i < 2; i++) {
-            if (table[id + 7] === undefined) break
-            if (table[id + 7].color !== opponentColor && id + 7 !== ampasant) break
-            if (!validDiagnoal(id, id + i * 7)) break
-            drawMovesAndValidate(id + i * 7, id, checkForCheck);
-        }
+    let opponentColor = (color === "white") ? "black" : "white";
+    let moves = [];
+    let directions = [[-7, -9, -8, -16], [7, 9, 8, 16]];
+    let side = (color === "white") ? 0 : 1;
 
-        for (let i = 1; i < 2; i++) {
-            if (table[id + 9] === undefined) break
-            if (table[id + 9].color !== opponentColor && id + 9 !== ampasant) break
-            if (!validDiagnoal(id, id + i * 9)) break
-            drawMovesAndValidate(id + i * 9, id, checkForCheck);
+    for (let i = 0; i < directions[side].length; i++) {
+        if (table[id + directions[side][i]] === undefined) continue
+        if (i > 1) {
+            if (table[id + directions[side][i]].color === color || table[id + directions[side][i]].color === opponentColor) break
+        } else {
+            if (table[id + directions[side][i]].color !== opponentColor && id + directions[side][i] !== ampasant) continue
+            if (!validDiagnoal(id, id + directions[side][i])) continue
         }
+        moves.push(id + directions[side][i]);
+        if (!firstPawnMove(id, color) && i > 1) break
     }
-
-
+    return moves
 }
-
-
-
 
 // other functions
 
-function drawMovesAndValidate(id, pieceId, checkForCheck) {
-    if (!checkForCheck) {
-        document.getElementById(`cell-${id}`).classList.add("avilable-moves");
-        validMoves.push(id);
-    } else {
-        if (table[id].piece === "king") {
-            checkingFigures.push({
-                id: id,
-                piece: table[pieceId].piece
-            })
-        }
-    }
+function drawMoves(moves) {
+    moves.map(element => {
+        document.getElementById(`cell-${element}`).classList.add("avilable-moves");
+    })
+}
+
+function checkFigures(moves, color) {
+    return moves.filter(element => {
+        return table[element].piece === "king" && table[element].color === color
+    });
 }
 
 function check(start, end, justCheck) {
-    let first = table[start];
-    let second = table[end];
-    let color = first.color;
+    let checkingFigures = [];
+    let before = table[start];
+    let after = table[end];
+    let color = before.color;
     if (justCheck) {
         color = (color === "white") ? "black" : "white";
-    } else {
-        table[end] = first;
-        table[start] = second;
     }
+    table[end] = before;
+    table[start] = {};
     table.forEach((cell, id) => {
         if (Object.keys(cell).length > 0 && cell.color !== color) {
-            showValidMoves(id, true);
+            checkingFigures.push(...showValidMoves(id));
         }
     });
-    table[end] = second;
-    table[start] = first;
+    checkingFigures = checkFigures(checkingFigures, color);
+    table[end] = after;
+    table[start] = before;
     if (checkingFigures.length > 0) {
         checkingFigures = [];
         return true
@@ -459,6 +253,15 @@ function check(start, end, justCheck) {
 
 function convertCell(id) {
     return [id % 8, Math.floor(id / 8)]
+}
+
+function isAttacked(arr, id) {
+    console.log("radi");
+    for (let i = 0; i < arr.length; i++) {
+        if (check(id, arr[i], false)) return true
+        console.log(arr[i]);
+    }
+    return false
 }
 
 function updateCastling(start) {
@@ -480,9 +283,10 @@ function updateCastling(start) {
 function checkCastle(start, end) {
     start = parseInt(start);
     end = parseInt(end);
-    if (table[start].piece !== "king" || Math.abs(start - end) < 2) return
+    if (table[start].piece !== "king" || Math.abs(start - end) < 2) return true
     if (table[start].color === "white") {
         if (end === 58) {
+            if (isAttacked([56, 57, 58, 59, 60], start)) return false
             table[56] = {};
             table[59] = {
                 color: "white",
@@ -490,6 +294,7 @@ function checkCastle(start, end) {
             }
         }
         if (end === 62) {
+            if (isAttacked([60, 61, 62, 63], start)) return false
             table[63] = {};
             table[61] = {
                 color: "white",
@@ -498,6 +303,7 @@ function checkCastle(start, end) {
         }
     } else {
         if (end === 2) {
+            if (isAttacked([0, 1, 2, 3, 4], start)) return false
             table[0] = {};
             table[3] = {
                 color: "black",
@@ -505,6 +311,7 @@ function checkCastle(start, end) {
             }
         }
         if (end === 6) {
+            if (isAttacked([4, 5, 6, 7], start)) return false
             table[7] = {};
             table[5] = {
                 color: "black",
@@ -512,6 +319,7 @@ function checkCastle(start, end) {
             }
         }
     }
+    return true
 }
 
 function checkEmpty(start, end) {
@@ -566,7 +374,7 @@ function setAmpasant(id) {
     return (table[id].color === "white") ? id - 8 : id + 8
 }
 
-function firstMove(id, color) {
+function firstPawnMove(id, color) {
     let a = convertCell(id);
     if (color === "white") {
         return (a[1] === 6) ? true : false
