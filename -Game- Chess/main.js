@@ -36,7 +36,6 @@ function moveFlow(event) {
     }
     if (selectedPiece === "") {
         if (!table[id].color) {
-            console.log("Empty cell");
             return false;
         }
         selectedPiece = id;
@@ -56,7 +55,6 @@ function moveFlow(event) {
                 console.log("Check!");
             }
         } else {
-            console.log("Invalid move.");
             selectedPiece = "";
             validMoves = [];
         }
@@ -221,16 +219,13 @@ function checkMate() {
     let pieceMoves = [];
     table.forEach((cell, id) => {
         if (cell.color === playerColor) {
-            console.log(cell);
             pieceMoves = showValidMoves(id);
             pieceMoves = pieceMoves.filter((element, index, arr) => {
                 return !check(id, element, false)
             });
-            console.log(pieceMoves);
             validMoves.push(...pieceMoves);
         }
     });
-    console.log(validMoves);
     if (validMoves.length === 0) return true
     else return false
 }
@@ -277,10 +272,8 @@ function convertCell(id) {
 }
 
 function isAttacked(arr, id) {
-    console.log("radi");
     for (let i = 0; i < arr.length; i++) {
         if (check(id, arr[i], false)) return true
-        console.log(arr[i]);
     }
     return false
 }
@@ -438,5 +431,3 @@ function drawBoard() {
     html += '</table>';
     document.getElementById("table-area").innerHTML = html;
 }
-
-// helper functions
